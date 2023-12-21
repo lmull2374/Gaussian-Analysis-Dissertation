@@ -1,0 +1,66 @@
+\documentclass[12pt]{report} 
+
+\title{Gaussian Analysis}
+\author{Ami Mulligan - s1806984}
+\date{March 2022}
+
+\usepackage[MMath,hyperref,colour,fancyhdr]{edmaths} 
+\usepackage{import}
+\usepackage{preamble}
+% \flushbottom
+\usepackage{subfiles}
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+\begin{abstract}
+Gaussian analysis is a mathematical field stemming from probability and measure theory. It extends the concept of analysis on Euclidean spaces to analysis on Gaussian spaces, through a number of analogous results. 
+
+Gaussian analysis has many applications in a number of mathematical fields. For example, it provides the basis for the field Stochastic Differential Equations, which in turn has many applications from Stochastic modelling to important financial models. In addition to this tangible application, Gaussian analysis also proves useful in fields such as Quantum Field Theory, where the idea of a Gaussian Free Field is common.
+
+We aim to present an extensive exposition of the framework for Gaussian analysis, as well as a number of key results in the field, such as Fernique's integrability theorem, the Borel isoperimetirc inequality, and the basics of Malliavin calculus. This dissertation will serve as a collected document presenting the most important results in the study of Gaussian analysis, with discussion on the implications and further applications of these results.
+\end{abstract}
+\declaration
+\dedication{I would like to thank Ilya Chevyerev for all the help that he has provided throughout the course of this dissertation, from research to writing.}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+An undergraduate mathematics student will be well versed in Euclidean spaces, and somewhat knowledgeable of analysis on Euclidean spaces. For example, calculus on Euclidean spaces is extremely useful, and plays a vital role in many different areas of mathematics. On the other hand, Gaussian spaces, and analysis thereon, is rather less familiar. This dissertation aims to introduce the framework required to do analysis on Gaussian spaces, before presenting some key results in the field of Gaussian analysis, and finally deriving a calculus for Gaussian probability spaces. 
+
+In Chapters 1 and 2 we will discuss definitions, characterisations, and examples of Gaussian measures, starting with the familiar case of a Gaussian distribution on $\R$, before abstracting to Gaussian measures on $\R^n$, and then introducing the concept of a Gaussian measure on an infinite dimensional Banach space. In addition to this we will discuss the structure of a Gaussian probability space through the Cameron-Martin theorem, and its implications.
+
+The main focus of this dissertation is a number of key results, from Fernique's theorem on the integrability of Gaussian measures, to the Gaussian analogue of the isoperimetric inequality, and finally the development of Malliavin calculus for random variables, and the Wiener chaos decomposition of probability spaces. The proofs for some of the presented results are quite involved, but we aim to present them in a clear and coherent manner in order to make them accessible to the reader.
+
+\chapter{Gaussian measures}
+\label{chp:Gaussian_measures}
+\subfile{chapters/Gaussian measures}
+
+\chapter{Cameron-Martin space}
+\subfile{chapters/Cameron-martin space}
+
+\chapter{Fernique's theorem}
+\subfile{chapters/Fernique's theorem}
+
+\chapter{Gaussian isoperimetric inequality}
+\subfile{chapters/Isoperimetric inequality}
+
+\chapter{Malliavin calculus}
+\subfile{chapters/Malliavin calculus}
+
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+To conclude this dissertation, let us review what has been achieved. We began by introducing the necessary framework in order to do analysis on Gaussian spaces, in particular, we introduced Gaussian measures, and discussed the structure of a Gaussian space via the Cameron-Martin theorem. 
+
+Once we had established the set up, we were then able to present two major results in the form of Fernique's theorem on the exponential tails of Gaussian measures, and the Gaussian isoperimetric inequality. The former provides a strong statement on the integrability of Gaussian measures, and we looked at its application to the infinite dimensional Wiener space. The latter argues that in a Gaussian space, halfspaces maximise measure for a fixed surface measure, which can be compared to the analogous result in Euclidean space, which states that spheres have this property.
+
+The final chapter of this dissertation focused on deriving a calculus for random variables on a Gaussian probability space, by first defining operators on $C(\R)$, then by abstracting these definitions to $\R^n$ and finally to the Wiener space. We were then able to explore how these operators acted on certain subspaces, which gave use the Wiener chaos decomposition and gave us a calculus for Gaussian spaces.
+
+In total, this dissertation gives an overview of the Gaussian analysis, with some major theorems presented in a self-contained manner with proofs, in order to provide a resource on the topic.
+
+\printbibliography[title = {References}]
+
+\end{document}

@@ -1,0 +1,87 @@
+\ProvidesPackage{preamble}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, bbm, tikz, xcolor, amsthm, twoopt, hyperref, mathrsfs, geometry, float, commath, pgfplots}
+\usetikzlibrary{positioning}
+\usetikzlibrary{cd}
+\graphicspath{ {./images/} }
+\usepackage[sorting = none]{biblatex}
+\addbibresource{Bib4.bib}
+\usepackage[ruled]{algorithm2e}
+% \hypersetup{
+%     colorlinks,
+%     citecolor=black,
+%     filecolor=black,
+%     linkcolor=black,
+%     urlcolor=black
+% }
+\geometry{margin=2.5cm}
+\pgfplotsset{compat=1.17}
+
+
+
+\theoremstyle{plain}
+% \theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{remark}{Remark} 
+
+% custom commands
+\newcommand{\emphs}[1]{\textcolor{blue}{\textbf{#1}}}
+\renewcommand{\theenumi}{(\roman{enumi})}
+% \newcommand{\figref}[1]{\figurename~\ref{#1}}
+
+\newcommand{\claim}{\textbf{Claim:}}
+\newcommand{\cbrac}[1]{\left\{ #1 \right\}}
+\newcommand{\brac}[1]{\left( #1 \right)}
+\newcommand{\sbrac}[1]{\left[ #1 \right]}
+\newcommand{\abrac}[1]{\left\langle #1 \right\rangle}
+% \newcommand{\abs}[1]{\left| #1 \right|}
+% \newcommand{\norm}[2][]{\left\| #2 \right\|_{#1}}
+\newcommand{\alig}[1]{\begin{aligned} #1 \end{aligned}}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\maths}[1]{\[\begin{aligned}#1\end{aligned}\]}
+
+\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\pder}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommandtwoopt{\inte}[4][][]{\int_{#1}^{#2}#3 \,\mathrm{d}#4}
+\newcommandtwoopt{\iinte}[5][][]{\iint_{#1}^{#2}#3 \,\mathrm{d}#4\mathrm{d}#5}
+
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\F}{\mathcal{F}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\1}{\mathbbm{1}}
+
+\newcommand{\bigbrac}[1]{\Big(#1\Big)}
+\newcommand{\bigcbrac}[1]{\Big\{#1\Big\}}
+\newcommand{\bigsbrac}[1]{\Big[#1\Big]}
+
+% additional commands
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\Ex}{\mathbb{E}}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\Bor}{\mathcal{B}}
+\renewcommand{\Dif}{\mathscr{D}}
+\renewcommand{\span}{\mathrm{span}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\Wie}{\mathscr{H}}
+\renewcommand{\L}{\mathcal{L}}
+
+% plotting
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}

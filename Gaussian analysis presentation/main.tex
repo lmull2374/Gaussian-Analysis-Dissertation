@@ -1,0 +1,199 @@
+\documentclass{beamer}
+
+\title{Gaussian Analysis}
+\author{Liam Mulligan - s1806984}
+\institute{The University of Edinburgh}
+\date{29 March 2022}
+
+\usepackage{import}
+\usepackage{preamble}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Gaussian Measures}
+\begin{frame}{Gaussian measures on \texorpdfstring{$\R$}{R}}
+    \begin{definition}
+    $\gamma$ is a \emphs{Gaussian} measure on $\R$ if it is either the \emph{Dirac measure}, $\delta_a$, or has density given by \maths{p(x;a,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\del{-\frac{\del{x-a}^2}{2\sigma^2}}.}
+    \end{definition}
+\end{frame}
+\begin{frame}{The Fourier transform}
+    \begin{proposition}
+    If $\gamma$ is a Gaussian measure on $\R$, then its Fourier transform is of the form \maths{\hat{\gamma}(y) = \exp\del{iay - \frac12\sigma^2y^2}.}
+    \end{proposition}    
+\end{frame}
+\begin{frame}{Gaussian measures on arbitrary Banach spaces}
+    \begin{definition}[\cite{Bogachev1998}]
+    Let $X$ be a Banach space, with continuous dual $X^*$. 
+    
+    Then $\gamma$ is a Gaussian measure on $\E(X,X^*)$ if for any $f\in X^*$, the induced measure $\gamma\circ f^{-1}$ on $\R$ is Gaussian.
+    \end{definition}
+\end{frame}
+\begin{frame}{The Fourier transform}
+    \begin{theorem}
+    A measure $\gamma$ on a Banach space $X$ is Gaussian if and only if it has fourier transform of the form \maths{\hat{\gamma}(f) = \exp\del{ia_\gamma(f) - \frac12R_\gamma(f)(f)}.}
+    \end{theorem}
+\end{frame}
+\begin{frame}{The Wiener space}
+    \begin{example}
+    \begin{itemize}
+        \item $C\intcc{0,1}$ \pause
+        \item with the minimal $\sigma$-algebra $\mathcal{C}$ such that all evaluation maps are measurable \pause
+        \item for a given Brownian motion $B = \cbr{B_t}_{t\in\intcc{0,1}}$, and probability space $\del{\Omega,\Sigma,P}$: \maths{\fullfunction{\phi}{\Omega}{C\intcc{0,1}}{\omega}{B_* := \del{t\mapsto B_t(\omega)}}} \pause
+        \item the \emphs{Wiener measure} is $P^W = P\circ\phi^{-1}$
+    \end{itemize}    
+    \end{example}   
+\end{frame}
+
+\section[Structure]{Structure of a Gaussian measure space}
+\begin{frame}{Cameron-Martin space}
+    \begin{definition}
+    For $h\in X$ \maths{\abs{h}_{H(\gamma)} := \sup\cbr{f(h):f\in X^*,\, R_\gamma(f)(f)\leq1}.} The \emphs{Cameron-Martin space} is then \maths{H(\gamma) := \cbr{h\in X:\,\abs{h}_{H(\gamma)}<\infty}.}
+    \end{definition}
+\end{frame}
+
+\begin{frame}{Cameron-Martin theorem}
+    \begin{theorem}
+    Let $\gamma$ be a Gaussian measure on $X$. 
+    \begin{enumerate}
+        \item If $h\notin H(\gamma)$, then $\gamma$ and $\gamma_h: = \gamma(\cdot-h)$ are mutually singular.
+        \item If $h\in H(\gamma)$, then $\gamma$ and $\gamma_h$ are equivalent.
+    \end{enumerate}    
+    \end{theorem}
+\end{frame}
+\begin{frame}{Outline of proof}
+    \begin{enumerate}
+        \item If $h\notin H(\gamma)$
+        \begin{itemize}
+            \item Show that the \emphs{total variation distance} $\norm{\gamma-\gamma_h} = 1$.
+        \end{itemize}\pause
+        \item If $h\in H(\gamma)$ 
+        \begin{itemize}
+            \item Show that the measure with density with respect to $\gamma$ \maths{\rho_h(x) := \exp\del{g(x) - \frac12\abs{h}_{H(\gamma)}^2}} is $\gamma_h$.
+        \end{itemize}
+    \end{enumerate} 
+\end{frame}
+
+\begin{frame}{Examples}
+    \begin{example}
+    \begin{enumerate}
+        \item If $\gamma$ is a nondegenerate measure on $\R^n$, then $H(\gamma) = \R^n$;
+        \item If $\gamma$ is a degenerate measure, then $H(\gamma)$ is the support of $\gamma$.
+    \end{enumerate}
+    \end{example}
+\end{frame}
+
+\section{Main results}
+% \subsection{Fernique's theorem}
+\begin{frame}{Fernique's theorem}
+    \begin{theorem}
+    If $\gamma$ is a centred Gaussian measure on $X$, and $q$ a $\E(X)$-measurable norm. Then there exists $\alpha>0$ such that \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}<\infty.}
+    \end{theorem}
+\end{frame}
+% \begin{frame}{Outline of proof}
+%     \textcolor{red}{Maybe?}
+% \end{frame}
+\begin{frame}{Application of Fernique's theorem}
+    \begin{itemize}
+        \item Recall the Wiener space $\del{C\intcc{0,1},\,\mathcal{C},\,P^W}$\pause
+        \item Via a theorem by Kolmogorov \cite{Kallenberg2021}, for $p\in\intoo{0,\frac12}$ then $P^W$ gives full measure to the subspace of $p$-H\"older continuous functions\pause
+        \item By Fernique's theorem there exists $\alpha>0$ such that \maths{\Ex\exp\del{\alpha\norm{w}_{p\text{-H\"ol}}^2}<\infty.}
+    \end{itemize}
+\end{frame}
+
+% \subsection{Borel's Isoperimetric inequality}
+\begin{frame}{Borel's Isoperimetric inequality}
+    \begin{theorem}
+    Let $\gamma_n$ be the standard Gaussian measure on $\R^n$, and $U$ be the closed unit ball. Then for any measurable $A$, $\epsilon>0$ \maths{\Phi^{-1}\cbr{\gamma_n\del{A+\epsilon U}}\geq\Phi^{-1}\cbr{\gamma_n(A)}+\epsilon.}
+    \end{theorem}
+\end{frame}
+\begin{frame}{Outline of proof}
+    \begin{itemize}
+        \item From Borell \cite{Borell2003} we have \emphs{Ehrhard's inequality} \maths{\Phi^{-1}\cbr{\gamma_n\del{\lambda A + (1-\lambda)B}}&\geq\lambda\Phi^{-1}\cbr{\gamma_n(A)} \\&\quad + (1-\lambda)\Phi^{-1}\cbr{\gamma_n(B)}}\pause
+        \item Apply the above to $\lambda^{-1}A$ and $(1-\lambda)^{-1}\epsilon U$
+    \end{itemize}
+\end{frame}
+
+\section{Malliavin Calculus}
+% \subsection{Gaussian Analysis on \texorpdfstring{$\R$}{R}}
+% \subsection{Gaussian Analysis on the Wiener space}
+\begin{frame}{Wiener integral}
+    \begin{itemize}
+        \item Take $H = L^2\del{\intcc{0,1};\R }$, with orthonormal basis $\cbr{e_n}_{n\in\N}$\pause
+        \item Define $W:H\to L^2(\Omega)$ by \maths{W(e_n) = \xi_n\sim\mathcal{N}(0,1)}
+    \end{itemize}
+\end{frame}
+\begin{frame}{The Derivative operator}
+    \begin{definition}
+    \begin{itemize}
+        \item Define \maths{\mathcal{S}:= \cbr{f\del{W(h_1),\cdots,W(h_n)}:f\in C^\infty\del{\R^n},\,h_i\in H}}\pause
+        \item For $F\in\mathcal{S}$ define \maths{\Dif_t F := \sum_{1\leq i\leq n}\dpd{}{x_i}f\del{W(h_1),\cdots,W(h_n)}h_i(t)}\pause
+    \end{itemize}
+    \end{definition}
+    
+    \vspace{-0.3cm}
+    \begin{example}
+    \begin{itemize}
+        \item $\Dif W(h) = h$
+    \end{itemize}
+    \end{example}
+\end{frame}
+\begin{frame}{The Divergence operator}
+    \begin{definition}
+    \begin{itemize}
+        \item Define \maths{\mathcal{S}_H := \cbr{\sum_{1\leq j\leq n}F_jh_j(t):F_j\in\mathcal{S},\,h_j\in H}}\pause
+        \item For $u\in\mathcal{S}_H$ define \maths{\delta u:= \sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}}\pause
+    \end{itemize}    
+    \end{definition}
+    
+    \vspace{-0.3cm}
+    \begin{example}
+    \begin{itemize}
+        \item $\delta h = W(h)$
+    \end{itemize}
+    \end{example}               
+\end{frame}
+
+% \subsection{Wiener Chaos decomposition}
+\begin{frame}{Derivative \& Divergence}
+    Is it true for $F\in L^2(\Omega)$ that $\delta\Dif F = F$?\pause
+    \newline
+    Not in general!\pause
+    
+    \vspace{0.5cm}
+    However, $\delta$ and $\Dif$ are \emphs{adjoint} in the sense that \maths{\Ex\del{\abrac{\Dif F,u}_H} = \Ex\del{F\delta u}.}
+\end{frame}
+\begin{frame}{The Ornstein-Uhlenbeck operator}
+    So how does $\delta\Dif$ act on $L^2(\Omega)$?\pause
+    
+    \vspace{0.5cm}
+    \begin{definition}
+    We define the \emphs{Ornstein-Uhlenbeck operator}, $\L:L^2(\Omega)\to L^2(\Omega)$, by \maths{\L F:= -\delta\Dif F.}
+    \end{definition}
+\end{frame}
+\begin{frame}{Wiener Chaos decomposition}
+    \begin{definition}
+    Define the \emphs{$n$-th Wiener Chaos}, $\Wie_n$, by \maths{\Wie_n = \overline{\span\cbr{H_n\del{W(h)}:\norm{h}_H=1}}.}
+    \end{definition}\pause
+    \begin{proposition}
+    If $G_n\in\Wie_n$ then \maths{\L G_n = -nG_n.}
+    \end{proposition}
+\end{frame}
+
+\section*{Conclusion}
+\begin{frame}{Conclusion}
+    \tableofcontents
+\end{frame}
+
+% \section{Bibliography}
+\begin{frame}
+    \printbibliography
+\end{frame}
+
+\end{document}

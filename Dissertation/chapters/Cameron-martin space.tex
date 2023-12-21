@@ -1,0 +1,77 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+In this chapter, we would like to gain some intuition for the structure of a Banach space $X$ with a Gaussian measure $\gamma$. An important part of this is the Cameron-Martin space, which we shall define, and then prove the Cameron-Martin theorem in addition to some related theorems at the end of the chapter. 
+
+\section{The Cameron-Martin space}
+
+We now define the Cameron-Martin space.
+\begin{definition}
+For $h\in X$, put \maths{\abs{h}_{H(\gamma)} = \sup\cbr{l(h):l\in X^*, \ R_\gamma(l)(l)\leq1}.} We can then define the \emph{Cameron-Martin space} to be the linear space \maths{H(\gamma) = \cbr{h\in X: \abs{h}_{H(\gamma)}<\infty}.}
+\end{definition}
+This definition is rather abstract, and gives little indication as to the underlying structure of the Cameron-Martin space. We spend the rest of this chapter trying to build an understanding of this structure. 
+
+We begin by with the following lemma.
+\begin{lemma}[\cite{Bogachev1998}]
+\label{lem:CM1}
+A vector $h\in X$ belongs to the Cameron-Martin space, $H(\gamma)$ precisely when there exists $g\in X_\gamma^*$ with $h = R_\gamma(g)$. In this case we have \maths{\abs{h}_{H(\gamma)} = \norm{g}_{L^2(\gamma)}.}
+\end{lemma}
+\begin{proof}
+Firstly suppose that we have $\abs{h}_{H(\gamma)}<\infty$, then by the Riesz representation theorem, there exists a $g\in X_\gamma^*$ such that for all $f\in X^*$ we have \maths{f(h) = \abrac{f-a_\gamma(f),g} = \inte[X]{\bigbrac{f(x)-a_\gamma(f)}g(x)}{\gamma(x)}.} Therefore, we can see that $h = R_\gamma(g)$. 
+
+On the other hand, suppose that we have $h = R_\gamma(g)$ for some $g\in X_\gamma^*$. Then we have \maths{\abs{h}_{H(\gamma)} &= \sup\cbr{l(h): \ l\in X^*, \ R_\gamma(l)(l)\leq1} \\&= \sup\cbr{R_\gamma(g)(l): \ l\in X^*, \ R_\gamma(l)(l)\leq1} \\&= R_\gamma(g)(g) < \infty,} hence $h\in H(\gamma)$ and $\abs{h}_{H(\gamma)} = \norm{g}_{L^2(\gamma)}$.
+\end{proof}
+
+Building on this, we introduce the notation $\Tilde{h} := g\in X^*$ if $h = R_\gamma g$, and we say that the element $g\in X^*$ is \emph{associated} with $h$. As seen in the proof of \lemref{lem:CM1}, we have that $\Tilde{h}$ is determined by \maths{f(h) = \inte[X]{\sbr{f(x) - a_\gamma(f)}\Tilde{h}(x)}{\gamma(x)}} for all $f\in X^*$.
+
+Let us suppose that we have two elements $\Tilde{h},\Tilde{k}$ defined as above, then notice that $\Tilde{h},\Tilde{k}\in X^*$, in particular, they are elements of the dual space of $X$. So let us consider the $L^2(\gamma)$ inner product on these elements
+\maths{\abrac{\Tilde{h},\Tilde{k}}_{L^2(\gamma)} = \inte[X]{\Tilde{h}(x)\Tilde{k}(x)}{\gamma(x)}.} Then it is easy to see that this defines an inner product on the Cameron-Martin space via \maths{\abrac{h,k}_{H(\gamma)}:= \abrac{\Tilde{h},\Tilde{k}}_{L^2(\gamma)}.} Furthermore, since we have $R_\gamma(X_\gamma^*)\subset X$, then by \lemref{lem:CM1}, we have that $H(\gamma) = R_\gamma(X_\gamma^*)$. In particular, we see that the Cameron-Martin space, $H(\gamma)$, is a Hilbert space, with the norm given by \maths{\norm{h} = \sqrt{\abrac{\Tilde{h},\Tilde{h}}_{L^2(\gamma)}} =  \sqrt{R_\gamma\del{\Tilde{h}}\del{\Tilde{h}}}.} Moreover, \lemref{lem:CM1} implies that the mapping $R_\gamma:X_\gamma^*\to H(\gamma)$ is in fact an isomorphism. This allows us to think of the Cameron-Martin space in terms of centred Gaussian variables on our space.
+
+\begin{example}
+Before proceeding, let us look at some examples of Cameron-Martin spaces.
+\begin{enumerate}
+    \item Suppose that we have a non-degenerate Gaussian measure, $\gamma$, on $\R^1$, then $H(\gamma)$ is equal to $\R^1$, since $\alpha x<\infty$ for all $\alpha,x\in\R^1$.
+    \item The above example generalises to non-degenerate Gaussian measures on $\R^n$.
+    \item Suppose $\rho$ is the law of $(X_1,X_2)$ such that $X_2 \equiv 0$ and $X_1\sim\mathcal{N}(0,1)$. Then $\rho$ is degenerate. Moreover we can take $h = \del{0,1}^T$ and $l = \del{0,\alpha}^T$ with $\alpha\in\R$. In particular \maths{R_\rho(l)(l) = \inte[\R^2]{\alpha^2x_2^2}{\rho(x)} = 0,} but $\abrac{l,h} = \alpha$, and since $\alpha$ is arbitrary, we see that $\abs{h}_{H(\rho)} = \infty$. In particular $h\notin H(\rho)$. Since $\del{1,0}^T$ and $\del{0,1}^T$ form a basis for $\R^2$, it follows that \maths{H(\rho) = \cbr{x\in\R^2:x_2 = 0}.}
+\end{enumerate}
+\end{example}
+
+\section{Cameron-Martin theorem}
+
+This section aims to provide alternate characterisations of the Cameron-Martin space in terms of equivalent measures. Let us begin by stating the theorem we wish to prove.
+\begin{theorem}[Cameron-Martin \cite{CM1944}]
+\label{the:CM}
+Let $\gamma$ be a Gaussian measure on a Banach space $X$.
+\begin{enumerate}
+    \item Let $h\in X$ be a vector such that $\abs{h}_{H(\gamma)} = \infty$, then the measures $\gamma_h:=\gamma(\cdot-h)$ and $\gamma$ are \emph{mutually singular}.
+    \item Let $h\in X$ be a vector such that $\abs{h}_{H(\gamma)}<\infty$, then the measures $\gamma_h$ and $\gamma$ are equivalent. In particular, we have the following characterisations of the Cameron-Martin space \maths{H(\gamma)= \cbr{h\in X:\abs{h}_{H(\gamma)}} = \cbr{h\in X:\gamma_h\sim\gamma} = X\cap R_\gamma\del{X_\gamma^*}.}
+\end{enumerate}
+\end{theorem}
+
+In order to prove this theorem, we will require a lemma allowing us to bound the \emph{total variation distance} \maths{\norm{\mu-\nu} = \sup_{A\in \Sigma}\abs{\mu(A) - \nu(A)}} between two probability measures $\mu,\nu$. Informally this can be thought of as the maximum difference that two probability measures can assign to the same element of the $\sigma$-algebra, $\Sigma$. The reason we wish to consider the total variation distance is that it gives a good way of characterising mutually singular measures, in particular, if it is the case that $\norm{\mu-\nu} = 1$, then it easy to see that there exists a set, $A\in\Sigma$ upon which, without loss of generality, $\mu(A) = 1$ and $\nu(A) = 0$.
+
+\begin{lemma}
+\label{lem:tvd_bound}
+Let $\gamma$ be a Gaussian measure on $\R^n$. Then for any vector $h\in R_\gamma(\R^n)$, one has the bounds \maths{1 - \exp\del{-\frac18\abs{h}_{H(\gamma)}^2}\leq\norm{\gamma_h-\gamma}\leq\sqrt{1 - \exp\del{-\frac14\abs{h}_{H(\gamma)}^2}}.}
+\end{lemma}
+\begin{proof}
+Notice that it suffices to prove the statement for centred non-degenerate Gaussian measures on $\R^n$, since if $\gamma$ is degenerate, then we can prove the statement on the support of $\gamma$, and for any $h\in X$ not in the support of $\gamma$, we have the equalities $\abs{h}_{H(\gamma)} = \infty$ and $\norm{\gamma_h - \gamma} = 1$. So we assume that $\gamma$ is a centred non-degenerate Gaussian measure on $\R^n$. In this case, notice that any such measure is the image of the standard Gaussian measure, $\mu$ on $\R^n$, under an invertible, linear mapping $T$, in particular, we have $\gamma_{Th} - \gamma = \del{\mu_h - \mu}\circ T^{-1}$, and $\abs{Th}_{H(\gamma)} = \abs{h}_{H(\mu)}$. So, we may assume that $\gamma$ is the standard Gaussian measure on $\R^n$. Moreover, we may then assume that $h = \alpha e_1$ for some $\alpha\in\R$. This allows us to reduce the argument to the $1$-dimensional case.
+
+Suppose that $\gamma$ is the standard Gaussian measure on $\R^1$, then $\gamma$ has density with respect to the Lebesgue measure given by \maths{p = \frac{1}{2\pi}\exp\del{-\frac12x^2},} and $\gamma_h$ has density given by \maths{q = \frac{1}{2\pi}\exp\del{\frac12(x-h)^2}.} Now we have that $\norm{\gamma_h - \gamma} = \frac12\norm{q - p}_{L^1}$, so let us consider the inequality \maths{\del{\sqrt{q} - \sqrt{p}}^2\leq\abs{q-p} = \abs{\sqrt{q}-\sqrt{p}}\abs{\sqrt{q}+\sqrt{p}}.} Taking the integral of the above inequality with respect to the Lebesgue measure gives \maths{\inte[\R]{\del{\sqrt{q}-\sqrt{p}}^2}{x}\leq \norm{q-p}_{L^1} &= \inte[\R]{\abs{\sqrt{q}-\sqrt{p}}\abs{\sqrt{q}+\sqrt{p}}}{x}\\&\leq\sqrt{\inte[\R]{\abs{\sqrt{q}-\sqrt{p}}^2}{x}\inte[\R]{\abs{\sqrt{q}+\sqrt{p}}^2}{x}},} where the second inequality follows by Cauchy-Schwarz. Notice however, that \maths{\inte[\R]{\del{\sqrt{q}-\sqrt{p}}^2}{x} &= \inte[\R]{q + p}{x} - 2\inte[\R]{\sqrt{q}\sqrt{p}}{x} \\&= 2 - 2\exp\del{-\frac18h^2},} where we note that since $\gamma_h$ and $\gamma$ are probability distributions we have that \maths{\inte[\R]{q}{x} = \inte[\R]{p}{x} = 1,} and \maths{\inte[\R]{\sqrt{q}\sqrt{p}}{x} &= \frac{1}{\sqrt{2\pi}}\exp\del{-\frac14h^2}\inte[\R]{\exp\del{-\frac{1}{2}\del{x^2 - hx}}}{x} \\ &= \frac{1}{\sqrt{2\pi}}\exp\del{-\frac18h^2}\inte[\R]{\exp\del{-\frac12u^2}}{u}\\&=\exp\del{-\frac18h^2}.} Above the third inequality follows by the substitution $u = x-\frac12h$.
+
+Similarly, it can be shown that \maths{\inte[\R]{\abs{\sqrt{q}+\sqrt{p}}^2}{x} = 2 + 2\exp\del{-\frac{1}{8}h^2}.} Substituting these into the previous inequality gives \maths{2 - 2\exp\del{-\frac18h^2}\leq\norm{p-q}_{L^1}&\leq\sqrt{\del{2 - 2\exp\del{-\frac18h^2}}\del{2 + 2\exp\del{-\frac18h^2}}}\\&=2\sqrt{1 - \exp\del{-\frac14 h^2}}.} Finally, we can rewrite this in terms of the total variation distance of the measures to give \maths{1 - \exp\del{-\frac18\abs{h}_{H(\gamma)}^2}\leq\norm{\gamma_h-\gamma}\leq\sqrt{1 - \exp\del{-\frac14\abs{h}_{H(\gamma)}^2}},} completing the proof.
+\end{proof}
+
+We now have all the tools to prove \thmref{the:CM}.
+\begin{proof}[Proof of \thmref{the:CM}]
+\begin{enumerate}
+    \item Let $\gamma$ be a Gaussian measure and $h\in X$ be such that $\abs{h}_{H(\gamma)} = \infty$. Firstly, suppose that $P$ is a continuous, finite dimensional, linear operator. Then suppose that we have a set $E$ in the $\sigma$-algebra corresponding to $P(X)$ such that $E$ maximises the value $\abs{(\gamma\circ P^{-1})_{Ph}(E) - \gamma\circ P^{-1}(E)}$, then we can consider \maths{\abs{(\gamma\circ P^{-1})_{Ph}(E) - \gamma\circ P^{-1}(E)} &= \abs{\gamma\del{P^{-1}\del{E-Ph}} - \gamma\del{P^{-1}\del{E}}} \\&= \abs{\gamma\del{P^{-1}(E) - h} - \gamma\del{P^{-1}(E)}} \\&= \abs{\gamma_h\del{P^{-1}(E)} - \gamma\del{P^{-1}(E)}} \\&\leq\sup_{A\in\Sigma_X}\abs{\gamma_h(A) - \gamma(A)},} where $\Sigma_X$ is the $\sigma$-algebra corresponding to $X$. In particular, we can see that for any continuous, finite dimensional, linear operator \maths{\norm{\gamma_h-\gamma}\geq\norm{\del{\gamma\circ P^{-1}}_{Ph} - \gamma\circ P^{-1}}.} By assumption, we have that for all $n\in\N$, there exists an $f\in X^*$ such that $R_\gamma(f)(f)\leq 1$ and $f(h)>n$. Since $f$ is a continuous finite dimensional linear operator, we have that \maths{\norm{\gamma_h - \gamma}\geq\norm{\del{\gamma\circ f^{-1}}_{f(h)} - \gamma\circ f^{-1}}\geq1 - \exp\del{-\frac18n^2},} where the second inequality follows from \lemref{lem:tvd_bound}. Now, by taking $n\to\infty$, we see that $\norm{\gamma_h-\gamma} = 1$, which is equivalent to $\gamma_h$ and $\gamma$ being mutually singular by previous discussion.
+    \item Suppose now that $h\in X$ with $\abs{h}_{H(\gamma)}<\infty$, then by \lemref{lem:CM1} there exists $g\in X_\gamma^*$ such that $h = R_\gamma(g)$. Now consider the measure with Radon-Nikodym density given by \maths{\rho_h(x) = \exp\del{g(x) - \frac12\abs{h}_{H(\gamma)}^2},} and denote this measure by $\nu$. Now consider the function, for $f\in X^*$, given by \maths{\phi(z) &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\inte[X]{\exp\del{i\del{f(x)-a_\gamma(f)-zg(x)}}}{\gamma(x)},} in particular, notice that $\phi(i)$ coincides with the Fourier transform of $\nu$, $\hat\nu(f)$. On the other hand, since $f-a_\gamma(f) - zg\in X_\gamma^*$, in particular denoting $r = f-a_\gamma(f)-zg$, we have that $\hat\gamma(r) = \exp\del{-\frac12R_\gamma(r)(r)}$, which corresponds exactly to \maths{\phi(z) &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\exp\del{-\frac12\inte[X]{\del{f - a_\gamma(f) - zg}^2}{\gamma}} \\ &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\exp\del{-\frac12\sigma^2(f) + zR_\gamma(g)(f) - \frac12\sigma^2(g)}.} However, by assumption, we have that $h = R_\gamma(g)$, therefore, $\sigma^2(g) = \abs{h}_{H(\gamma)}^2$, and $R_\gamma(g)(f) = f(h)$. Therefore, \maths{\hat\nu(f) = \phi(i) &= \exp\del{i\del{a_\gamma(f) + f(h)} - \frac12\sigma^2(f)},} and noting that $a_{\gamma_h}(f) = a_\gamma(f) + f(h)$, we see that the Fourier transform of $\nu$ coincides with the Fourier transform of $\gamma_h$ obtained via \thmref{the:arb_gauss_ft}. Hence, we can conclude that $\gamma_h$ is the measure with Radon-Nikodym density given by \maths{\rho_h = \exp\del{g(x) - \frac12\abs{h}_{H(\gamma)}^2}} with respect to $\gamma$. This implies that $\gamma$, and $\gamma_h$ are equivalent.
+    
+    Finally, we note that \maths{H(\gamma) = \cbr{h\in X:\abs{h}_{H(\gamma)}<\infty} = \cbr{h\in X:\gamma_h\sim\gamma} = X\cap R_\gamma(X_\gamma^*),} where the first equality is by definition, the second is by the argument above, and the the third is by the discussion at the end of the previous section, completing the proof.
+\end{enumerate}
+
+\end{proof}
+
+\end{document}

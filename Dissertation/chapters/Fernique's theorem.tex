@@ -1,0 +1,72 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+In this section we aim to generalise the idea that Gaussian measures have \emph{exponential tails}. This is easy to see for Gaussian measures on $\R^1$, for example, if we take $\gamma_1$ to be the standard Gaussian measure on $\R^1$, then we can consider the expectation \maths{\Ex_{\gamma_1}\sbr{e^{\alpha x^2}} &= \inte[\R^1]{e^{\alpha x^2}}{\gamma_1(x)} \\ &= \frac{1}{\sqrt{2\pi}}\inte[\R^1]{e^{\del{\alpha - \frac12}x^2}}{x} \\ &= \frac{1}{\sqrt{1-2\alpha}}.} Hence, taking $\alpha\in\intoo{0,\frac12}$ ensures that $\Ex_{\gamma_1}\sbr{e^{\alpha x^2}}<\infty$. It is relatively easy to verify that this property holds for arbitrary Gaussian measures on $\R^1$.
+
+\section{Measurable norms}
+
+In order to understand the statement of Fernique's theorem, we introduce the notion of \emph{measurable norms} on a Banach space $X$. Firstly recall that a norm is defined by the following.
+\begin{definition}
+\label{def:norm}
+Given a vector space $X$, a norm is a function $q:X\to\R$ such that:
+\begin{enumerate}
+    \item $q(x)\geq 0$ for all $x\in X$, and $q(x) = 0$ if and only if $x = 0$;
+    \item $q(\lambda x) = \abs{\lambda}q(x)$ for all $x\in X$ and $\lambda\in\R$;
+    \item $q(x+y)\leq q(x)+q(y)$ for all $x,y\in X$.
+\end{enumerate}
+\end{definition}
+\begin{remark}
+Recall that a Banach space is defined to be a \emph{complete normed vector space}.
+\end{remark}
+
+This is a familiar definition, but it is worth having on hand as we discuss the proof of Fernique's theorem. In particular, we also define a norm to be measurable in the following way.
+\begin{definition}[\cite{Bogachev1998}]
+\label{def:meas_norm}
+Let $\gamma$ be a Gaussian measure on a Banach space $X$. A real-valued function $q$, measurable with respect to $\E(X)$, is called a \emph{measurable norm} if there exists some $\E(X)$-measurable linear subspace $X_0\subset X$ of full $\gamma$-measure such that $q$ is a norm on $X_0$.
+\end{definition}
+
+For non-degenerate, finite dimensional Gaussian measures, on $\R^n$ for example, this coincides with a norm on $\R^n$ in the regular sense. However, suppose that we have a degenerate Gaussian measure on $\R^2$, then its support is some linear subspace, $L$, isometrically isomorphic to $\R$. Then we need only consider a norm on $L$ rather than on $\R^2$.
+
+\section{Fernique's theorem}
+
+To reiterate, we wish to prove that Gaussian measures on arbitrary Banach spaces have exponential tails, in particular there exists $\alpha>0$ such that $\exp\del{\alpha q^2}$ is integrable with respect to the measure, where $q$ is a norm. Formally, the statement is as follows.
+\begin{theorem}[Fernique's theorem \cite{Fernique1970}]
+\label{the:fernique}
+Let $\gamma$ be a centred Gaussian measure on a Banach space $X$, and $q$ a $\E(X)$-measurable norm. Then there exists $\alpha>0$ such that \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}<\infty.}
+\end{theorem}
+\begin{proof}
+Let $\tau, t\in\R_+$ be arbitrary and consider the product \maths{\gamma\del{q\leq\tau}\gamma\del{q>t} &= \iinte[q(x)\leq\tau; \ q(y)>t]{}{\gamma(x)}{\gamma(y)}.} Write $x = \frac{1}{\sqrt{2}}\del{u-v}$ and $y = \frac{1}{\sqrt{2}}\del{u+v}$, then notice that $x$ and $y$ have the same form as the mapping in \propref{prop:centred_gaussians} with $\varphi = \frac{3\pi}{4}$ and $\varphi = \frac{\pi}{4}$ respectively. Furthermore, $\gamma$ is centred Gaussian measure by assumption, so applying \propref{prop:centred_gaussians} gives \maths{\gamma\del{q\leq\tau}\gamma\del{q>t} = \iinte[q\del{\frac{u-v}{\sqrt{2}}}\leq\tau; \ q\del{\frac{u+v}{\sqrt{2}}}>t]{}{\gamma(u)}{\gamma(v)}.} Now notice that for any $u\in X$ we have \maths{q(u)\geq\frac{q(u+v) - q(u-v)}{2}>\frac{t-\tau}{\sqrt{2}}} if $q\del{\frac{u-v}{\sqrt{2}}}\leq\tau$ and $q\del{\frac{u+v}{\sqrt{2}}}>t$. This implies that 
+\begin{equation}
+    \label{eq:estimate}
+    \gamma(q\leq\tau)\gamma(q>t)\leq\iinte[q(u)>\frac{t-\tau}{\sqrt{2}}; \ q(v)>\frac{t-\tau}{\sqrt{2}}]{}{\gamma(u)}{\gamma(v)} = \sbr{\gamma\del{q>\frac{t-\tau}{\sqrt{2}}}}^2.
+\end{equation}
+
+Since $q$ is a norm, we can choose $\tau$ such that \maths{c:=\gamma(q\leq\tau)>\frac12.} We may assume that $c<1$, since if $c = 1$ then we would have that \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma} = \inte[q(x)\leq\tau]{\exp\del{\alpha q^2}}{\gamma}\leq \exp\del{\alpha \tau^2}<\infty.} Then for this $\tau$, we can define the following \maths{p_0 := \frac{\gamma(q>\tau)}{\gamma(q\leq\tau)}<1.} Subsequently define the sequence $\cbr{t_n}_{n\in\N_0}$ by \maths{t_n = \tau + t_{n-1}\sqrt{2}, \ n\in\N, \ t_0 = \tau.} Notice that we have \maths{t_n &= \tau + t_{n-1}\sqrt{2} \\ &= \tau\sum_{0\leq i\leq n}2^{i/2} \\ &= \tau\del{\frac{2^{(n+1)/2} - 1}{\sqrt{2} - 1}} \\ &= \tau\del{1 + \sqrt{2}}\del{2^{(n+1)/2}-1}.} Finally, we define the numbers $p_n$ for $n\in\N$ by \maths{\gamma(q>t_n) = cp_n.} At this point, consider \maths{c^2p_n &= \gamma\del{q\leq\tau}\gamma\del{q>t_n},} then by applying \eqref{eq:estimate} we get \maths{c^2p_n&\leq\sbr{\gamma\del{q>\frac{t_n-\tau}{\sqrt{2}}}}^2 \\ &= \sbr{\gamma\del{q>\frac{\tau\sum_{0\leq i\leq n}2^{i/2} - \tau}{\sqrt{2}}}}^2 \\ &= \sbr{\gamma\del{q>\tau\sum_{0\leq i\leq n-1}2^{i/2}}}^2 \\ &= c^2p_{n-1}^2.} In other words, we have that $p_n\leq p_{n-1}^2$. Applying this inequality $n$ times gives \maths{p_n\leq p_0^{2^n} = \del{\frac{1-c}{c}}^{2^n}.} In particular, we have the inequality 
+\begin{equation}
+    \label{eq:gamma_bound}
+    \gamma(q>t_n) \leq c\del{\frac{1-c}{c}}^{2^n}.
+\end{equation}
+
+Now let us choose \maths{\alpha = \frac{1}{24\tau^2}\log\frac{c}{1-c}.} Then we can begin estimating the integral \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma} &= \inte[q\leq\tau]{\exp\del{\alpha q^2}}{\gamma} + \sum_{n\geq0}\inte[t_n< q\leq t_{n+1}]{\exp\del{\alpha q^2}}{\gamma} \\ &\leq c\exp\del{\alpha \tau^2} + \sum_{n\geq0}\exp\del{\alpha t_{n+1}^2}\gamma(t_n<q\leq t_{n+1}),} where the inequality is a consequence of $\exp:\R\to\R$ being an increasing function. Furthermore, notice that $\cbr{t_n<q\leq t_{n+1}}\subset\cbr{t_n<q}$, therefore, $\gamma(t_n<q\leq t_{n+1})\leq\gamma(q>t_n)$. Substituting \eqref{eq:gamma_bound}, we can bound the integral by  \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}&\leq c\exp\del{\alpha\tau^2} + \sum_{n\geq0}c\del{\frac{1-c}{c}}^{2^n}\exp\del{\alpha t_{n+1}^2}.} Now since \maths{t_{n+1}^2 = \tau^2\del{1 + \sqrt{2}}^2\del{2^{(n+2)/2} - 1}^2 \leq \tau^2\del{1 + \sqrt{2}}^22^{(n+2)} = 4\tau^2\del{1+\sqrt{2}}^22^n,} and $\exp$ is increasing, we can bound the integral by \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}&\leq c\exp\del{\alpha\tau^2} + \sum_{n\geq0}c\del{\frac{1-c}{c}}^{2^n}\exp\del{4\alpha\tau^2\del{1+\sqrt{2}}^22^n} \\ &= c\exp\del{\alpha\tau^2} + c\sum_{n\geq0}\exp\del{2^n\del{\log\frac{1-c}{c} + 4\alpha\tau^2\del{1+\sqrt{2}}^2}} \\ &= c\exp\del{\alpha\tau^2} + c\sum_{n\geq0}\exp\del{2^n\log\frac{1-c}{c}\del{1 - \frac{4\del{1+\sqrt{2}}^2}{24}}}.} Since $4\del{1 + \sqrt{2}}^2\leq 24$, we can bound the integral by \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}&\leq c\exp\del{\alpha\tau^2} + c\sum_{n\geq0}\exp\del{2^n\log\frac{1-c}{c}} \\ &= c\exp\del{\alpha\tau^2} + c\sum_{n\geq0}\del{\frac{1-c}{c}}^{2^n} \\ &<\infty,} where the last inequality follows since $\frac{1-c}{c}<1$. Hence \maths{\inte[X]{\exp\del{\alpha q^2}}{\gamma}<\infty} for $\alpha = \frac{1}{24\tau^2}\log\frac{c}{1-c}$, proving the claim.
+\end{proof}
+\subsection{Application to the Wiener space}
+We would now like to present an application of Fernique's theorem in an infinite dimensional space. Recall the definition of a Brownian motion, $B = \cbr{B_t}_{t\in\intcc{0,1}}$, in \defnref{def:brownian_motion_1}. Then we have that $B$ is a Gaussian process on the Wiener space $\del{C\intcc{0,1},\mathscr{C},P^W}$, where $\mathscr{C}$ is the $\sigma$-algebra generated by the coordinate maps $t\mapsto\omega(t)$ for $\omega\in C\intcc{0,1}$. We then have the following characterisation of $B$ \maths{\fullfunction{B_t}{C\intcc{0,1}}{\R}{\omega}{\omega(t)}.}
+
+Now we wish to employ a theorem by Kolmogorov on the continuity of a process $X = \cbr{X_t}$ on $\R^d$ under certain conditions.
+
+Firstly recall that for $f\in C\intcc{0,1}$ to be $p$-H\"older continuous means that there exists some constant $\beta\in\R$ such that or all $t,s\in\intcc{0,1}$, we have \maths{\abs{f(t) - f(s)} \leq \beta\abs{t-s}^p.} In particular, we can define a norm $\norm{\,\cdot\,}_{p\text{-H\"ol}}$ by \maths{\norm{f}_{p\text{-H\"ol}} := \sup_{t\neq s}\frac{\abs{f(t)-f(s)}}{\abs{t-s}^p}.} It is then easy to see that $f$ is $p$-H\"older continuous if and only if $\norm{f}_{p\text{-H\"ol}}<\infty$.
+
+We now introduce the following theorem by Kolmogorov.
+\begin{theorem}[Theorem 4.23 \cite{Kallenberg2021}]
+\label{the:kolmogorov}
+Let $X$ be a process on $\intcc{0,1}$ with values in a complete metric space $\del{S,\rho}$, such that \maths{\Ex\sbr{\rho\del{X_t,X_s}}^a\leq C(a,b)\abs{t-s}^{1+b} && \forall t,s\in\intcc{0,1},} for some constants $a,b,C(a,b)>0$. Then a version of $X$ is H\"older continuous of order $p$ for all $p\in\intoo{0,b/a}$.
+\end{theorem}
+\begin{proof}
+We omit the proof of this theorem for brevity, but it can be found under Theorem 4.23 in Kallenberg's `Foundations of Modern Probability' \cite{Kallenberg2021}.
+\end{proof}
+
+Furthermore, we have that $B$ takes values in $\del{\R,\abs{\cdot-\cdot}}$, where $\abs{\cdot-\cdot}$ is the absolute value metric on $\R$. In particular, $B$ takes values in a complete metric space. Let $a>0$ and let us consider the expectation for $t,s\in\intcc{0,1}$ \maths{\Ex\abs{B_t-B_s}^a = C(a)\abs{t-s}^{a/2},} where $C(a)$ is a constant dependant only on $a$. So by choosing $a>2$ and $b = \frac{a-2}{2}$, we have that \maths{\Ex\abs{B_t - B_s}^a = C(a)\abs{t-s}^{1+b} && \forall t,s\in\intcc{0,1}.} In other words, the Brownian motion $B$ satisfies the conditions of \thmref{the:kolmogorov}. Moreover, by the definition of a Brownian motion, the paths are almost surely continuous, so we may drop the `a version of' condition in the result of \thmref{the:kolmogorov}. In particular, we conclude that $B$ is $p$-H\"older continuous on $\intcc{0,1}$ for $p\in\intoo{0,b/a} = \intoo{0,\frac12 - \frac1a}$. Since $a$ is arbitrary, we get that $B$ is $p$-H\"older continuous for $p\in\intoo{0,\frac12}$.
+
+Returning to our previous discussion, we have that $B$ is $p$-H\"older continuous or all $p\in\intoo{0,\frac12}$, in other words $\norm{B}_{p\text{-H\"ol}}<\infty$ almost surely for $p\in\intoo{0,\frac12}$. This is equivalent to saying that \maths{P^W\del{\norm{B}_{p\text{-H\"ol}}<\infty} = 1,} in other words $P^W$ gives full measure to the subspace of $C\intcc{0,1}$ composed of $p$-H\"older continuous functions, denoted $C^{p\text{-H\"ol}}\subset C\intcc{0,1}$. Furthermore, $\norm{\,\cdot\,}_{p\text{-H\"ol}}$ is a norm on $C^{p\text{-H\"ol}}$. In the language of Fernique's theorem, $\norm{\,\cdot\,}_{p\text{-H\"ol}}$ is a measurable norm on the Wiener space. Therefore, by \thmref{the:fernique}, there exists $\alpha>0$ such that \maths{\Ex\del{e^{\alpha\,\norm{B}_{p\text{-H\"ol}}^2}}<\infty.} This is a very strong statement about the integrability of functions against the Wiener measure.
+\end{document}

@@ -1,0 +1,171 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Gaussian measures are an integral part Gaussian analysis and therefore of this dissertation. A good understanding of them is necessary for what will be presented in the later chapters. Hence, we shall spend the first chapter introducing Gaussian measures through their definitions, some basic properties and a number of examples in order to provide a strong base for the rest of our discussion.
+
+\section{Gaussian measures on the real line}
+
+We will begin by introducing a Gaussian measure on the real line. This is the simplest version of a Gaussian measure, and will allow us to build some intuition with an object which we are already familiar with.
+
+\begin{definition}[\cite{Bogachev1998}]
+\label{def:gauss_1d}
+A Borel probability measure, $\gamma$ on $\R$, is \emph{Gaussian} if it is either the \emph{Dirac measure} $\delta_a$ at a point, or has density \maths{p(\cdot,a,\sigma^2) : x\mapsto \frac{1}{\sqrt{2\pi\sigma^2}}\exp\brac{-\frac{\brac{x-a}^2}{2\sigma^2}}} with respect to the \emph{Lebesgue measure} on $\R$. In the latter case, $\gamma$ is said to be \emph{non-degenerate}. We call $a$ and $\sigma^2$ the \emph{mean} and \emph{variance} of $\gamma$ respectively.
+\end{definition}
+We now introduce a proposition which allows us to completely determine a measure.
+\begin{proposition}[\cite{Bogachev2007}]
+\label{prop:ft_equiv}
+If two bounded Borel measures have equal Fourier transforms, then they coincide.
+\end{proposition}
+\begin{proof}
+We will outline the proof of this proposition following the proof found in Proposition 3.8.6 in Bogachev's \textit{Measure Theory} \cite{Bogachev2007}. 
+
+To this end, it suffices to show that if $\mu$ is a measure on $\R^n$ such that its Fourier transform, $\hat{\mu}$, is identically zero, then so is $\mu$. Suppose that $\mu$ is such that $\hat{\mu} = 0$, then we can assume that $\norm{\mu}\leq 1$ since it is bounded. Furthermore, consider a bounded continuous function $f$, and we may similarly assume that $\abs{f}\leq 1$. Finally, take $\epsilon\in\intoo{0,1}$. Now let $f_0$ be a continuous function with bounded support such that $\abs{f_0}\leq 1$ and \maths{\inte[\R^n]{\abs{f(x)-f_0(x)}}{\abs{\mu }(x)}\leq\epsilon.} Since $f_0$ has bounded support, we can find a cube $K = \intcc{-\pi k,\pi k}^n$ containing the support of $f_0$ such that $\abs{\mu }\del{\R^n\setminus K}<\epsilon$. Now by the Stone-Weierstrass theorem, there exists a continuous function of the form \maths{g(x) = \sum_{1\leq j\leq m}c_j\exp\del{i\abrac{y_j,x}},} where the $y_j$ are vectors with coordinates of the form $\frac{l}{k}$, such that \maths{\abs{f_0(x)-g(x)}\leq\epsilon,} for all $x\in K$. Notice that $g$ is periodic on $\R^n$ by construction, hence $\abs{g(x)}<1 + \epsilon<2$ on $\R^n$. Moreover, $\inte[\R^n]{g}{\mu } = 0$, since $\hat{\mu } = 0$. Now it just remains to put all the parts together.
+\maths{\abs{\inte[\R^n]{f}{\mu }} &\leq \abs{\inte[\R^n]{f-f_0}{\mu }} + \abs{\inte[\R^n]{f_0}{\mu }} \\ &\leq\epsilon + \abs{\inte[\R^n]{f_0 - g + g}{\mu }} \\ &\leq 2\epsilon + \inte[\R^n\setminus K]{\abs{g}}{\abs{\mu }} \\ &\leq 4\epsilon.} Taking $\epsilon\to 0$ gives the result.
+\end{proof}
+With this result, it is natural to ask what the Fourier transform of an arbitrary Gaussian measure, $\gamma$ on $\R$, looks like. To this end, we evaluate the integral \maths{\hat\gamma(y) := \inte[\R]{\exp(iyx)}{\gamma(x)} = \frac{1}{\sqrt{2\pi\sigma^2}}\inte[\R]{\exp(iyx)\exp\brac{-\frac{1}{2}\brac{\frac{x-a}{\sigma}}^2}}{x}.} Using the substitution $v = \frac{x-a}{\sigma} - i\sigma y$, we obtain \maths{\hat\gamma(y) &= \frac{1}{\sqrt{2\pi}}\inte[\R]{\exp\brac{iy(\sigma v + i\sigma^2y + a) - \frac12(v + i\sigma y)^2}}{v} \\ &= \frac{1}{\sqrt{2\pi}}\exp\brac{iay - \frac{1}{2}\sigma^2y^2}\inte[\R]{\exp\brac{-\frac12v^2}}{v} \\ &= \exp\brac{iay - \frac12\sigma^2y^2}.} We can state this formally as below.
+\begin{proposition}
+\label{prop:gauss_ft}
+Let $\gamma$ be an arbitrary Gaussian measure on $\R$, then its Fourier transform is of the form \maths{\hat\gamma(y) = \exp\brac{iay - \frac12\sigma^2y^2}.}
+\end{proposition}
+\begin{remark}
+Notice that this holds even when $\gamma$ is the Dirac measure at a point $a$, since we have \maths{\inte[\R]{f(y)}{\delta_a(y)} = f(a),} and the Dirac measure corresponds to a Gaussian measure with mean $a$ and zero variance.
+\end{remark}
+
+\section{Gaussian measures on \texorpdfstring{$\R^n$}{Rn}}
+
+We now extend some of the concepts from the previous section to Gaussian measures on $\R^n$.
+\begin{definition}[\cite{Bogachev1998}]
+\label{def:gauss_Rn}
+A Borel probability measure, $\gamma$ on $\R^n$, is \emph{Gaussian} if for any linear functional $f$ on $\R^n$, the induced measure $\gamma\circ f^{-1}$ is Gaussian.
+\end{definition}
+
+\begin{example}
+\label{ex:nd_gauss}
+We will now look at some examples.
+\begin{enumerate}
+    \item Consider the measure, $\mu$ on $\R^n$ with density with respect to the Lebesgue measure given by \maths{\dod{\mu}{\lambda}(x) = \frac{1}{\del{2\pi}^{n/2}}e^{-\frac12\norm{x}^2}.}
+    Then one can verify that for any linear functional $f$ on $\R^n$, by considering $f$ as an element of $\R^n$, we have \maths{\hat{\mu\circ f^{-1}}(t) = \exp\del{-\frac12t^2\norm{f}^2}.} Comparing this to \propref{prop:gauss_ft}, we see that $\mu\circ f^{-1}$ is a Gaussian measure. In fact $\mu$ is the standard Gaussian measure on $\R^n$, denoted $\gamma_n$.
+    \item On the other hand, suppose that we have a measure $\rho$ on $\R^2$ such that the density with respect to the Lebesgue measure is given by \maths{\dod{\rho}{\lambda}(x) = \case{\frac1\pi e^{-\frac12\norm{x}^2} & \text{if $x\in\intco{0,\infty}^2\cup\intoc{-\infty,0}^2$} \\ 0 & \text{otherwise}}.} 
+    Firstly notice that if we take $f = \frac{1}{\sqrt{2}}\del{1,1}^T$, then \maths{\hat{\rho\circ f^{-1}}(t) = \frac12e^{-\frac12t^2},} which is not of the form required to be Gaussian by \propref{prop:gauss_ft}. However, if we consider $e_1 = \del{1,0}^T$, then \maths{\hat{\rho\circ e_1^{-1}}(t) = e^{-\frac{1}{2}t^2},} which implies that $\rho\circ e_1^{-1}$ is Gaussian. Similarly, we see that for $e_2 = \del{0,1}^T$, we have $\rho\circ e_2^{-1}$ is Gaussian. This implies that each component has a Gaussian distribution, but their sum does not.
+\end{enumerate}
+\end{example}
+
+We now extend \propref{prop:gauss_ft} to Gaussian measures on $\R^n$.
+
+\begin{proposition}
+\label{prop:n_gauss_ft}
+A measure $\gamma$, on $\R^n$ is Gaussian if and only if its Fourier transform has the form 
+\begin{equation}
+    \label{eq:n_gauss_ft}
+    \hat\gamma(y) = \exp\brac{i\abrac{y,a} - \frac12\abrac{Ky,y}},
+\end{equation} 
+where $a\in\R^n$ is a vector and $K$ is a nonnegative matrix.
+
+The measure $\gamma$ has density if and only if $K$ is nondegenerate, and in this case the density is given by \maths{p(\cdot,a,K): x\mapsto \frac{1}{\sqrt{(2\pi)^n\det K}}\exp\brac{-\frac12\abrac{K^{-1}(x-a),x-a}}.}
+\end{proposition}
+\begin{proof}
+Firstly suppose that $\gamma$ is a Borel measure on $\R^n$ with Fourier transform given by \eqref{eq:n_gauss_ft}. Then for any linear functional $f:\R^n\to\R$ we can consider the measure $\nu = \gamma\circ f^{-1}$ on a $1$-dimensional subspace of $\R^n$. Let us consider the Fourier transform of $\nu$,
+\maths{\hat\nu(t) = \inte[\R]{\exp\brac{its}}{\nu(s)} = \inte[\R^n]{\exp\brac{itf(x)}}{\gamma(x)}.} Let us denote by $f$ the linear functional considered as an element of $\R^n$. This gives \maths{\hat\nu(t) &= \inte[\R^n]{\exp\brac{it\abrac{f,x}}}{\gamma(x)} \\&= \exp\brac{it\abrac{f,a} - \frac12t^2\abrac{Kf,f}},} by assumption. Hence $\nu$ is a Gaussian measure by \propref{prop:gauss_ft}, and since this holds for arbitrary $f$, we have that $\gamma$ is a Gaussian measure.
+
+For the other direction, assume that $\gamma$ is a Gaussian measure, so all measures of the form $\nu = \gamma\circ f^{-1}$ are Gaussian for a linear functional $f$. Let us denote their means and variances by $a(f)$ and $\sigma^2(f)$ respectively. Then we have the following \maths{\hat\gamma(f) &= \inte[\R^n]{\exp\brac{i\abrac{f,x}}}{\gamma(x)} \\ &= \inte[\R]{\exp\brac{it}}{\nu(t)} \\&= \exp\brac{ia(f) - \frac{1}{2}\sigma^2(f)}.} However, we can write
+\maths{a(f) &= \inte[\R]{t}{\nu(t)} = \inte[\R^n]{f(x)}{\gamma(x)}, \\ \sigma^2(f) &= \inte[\R]{\brac{t - a(f)}^2}{\nu(t)} = \inte[\R^n]{\bigbrac{f(x) - a(f)}^2}{\gamma(x)}.} So, we see that $f\mapsto a(f)$ is linear, and $f\mapsto\sigma^2(f)$ is a nonnegative quadratic form. In particular there exists a vector $a$ and a nonnegative matrix $K$ such that $a(f) = \abrac{a,f}$ and $\sigma^2(f) = \abrac{Kf,f}$. This yields \eqref{eq:n_gauss_ft}.
+
+The claim about densities can be reduced to a $1$-dimensional case by choosing the coordinates corresponding to the eigenvectors of $K$, and considering the densities of a $1$-dimensional Gaussian measure.
+\end{proof}
+
+% As an immediate corollary, since we are working in a Banach space with an orthonormal basis, we have the following.
+\begin{corollary}
+Let $\gamma$ be a Gaussian measure on $\R^n$ with Fourier transform given by \eqref{eq:n_gauss_ft}. Then \maths{a &= \inte[\R^n]{x}{\gamma(x)}, \\ \abrac{Ku,v} &= \inte[\R^n]{\abrac{u,x-a}\abrac{v,x-a}}{\gamma(x)}\ \ \ \forall u,v\in\R^n.} The vector $a$ is called the \emph{mean} of $\gamma$, and $K$ is called the covariance operator.
+\end{corollary}
+\begin{remark}
+By comparing \propref{prop:n_gauss_ft} to \exref{ex:nd_gauss}(i) we see that in the case of the standard Gaussian measure, $\gamma_n$, on $\R^n$, that $K = \mathbb{I}_n$.
+\end{remark}
+
+\section{Gaussian measures in infinite dimensions}
+In this section, we abstract once more to Gaussian measures on arbitrary Banach spaces. This will, however, require some extra definitions and notions, which we introduce below. We begin with a couple of definitions that will allow us to define an appropriate space upon which we can consider a Gaussian measure.
+\begin{definition}[\cite{Bogachev1998}]
+\label{def:cyl_sets}
+Let $F$ be a family of functions on a set $X$ into $\R$ with the Borel $\sigma$-algebra. We denote by $\E(X,F)$ the minimal $\sigma$-field of subsets of $X$, with respect to which all functionals $f\in F$ are measurable.
+\end{definition}
+\begin{definition}
+\label{def:separating_func}
+A set of $\R$-valued functions $F$ is said to \emph{separate} the points of a set $X$, if for all $x,y\in X$, there exists $f\in F$ such that $f(x)\neq f(y)$.
+\end{definition}
+
+With these definitions in hand, we can now define a Gaussian measure on an arbitrary Banach space.
+\begin{definition}
+\begin{enumerate}
+    \item Let $E$ be a linear space and $F$ some linear space of linear functions separating $E$. A probability measure $\gamma$ on $\E(E,F)$ is called Gaussian if, for any $f\in F$, the measure $\gamma\circ f^{-1}$ is Gaussian.
+    \item Let $X$ be a Banach space with continuous dual $X^*$. A probability measure $\gamma$ on $\E(X): = \E(X,X^*)$ is said to be Gaussian if for any $f\in X^*$, the induced measure $\gamma\circ f^{-1}$ on $\R$ is Gaussian. The measure is called centred if all the induced measures are centred (have mean $0$).
+    \item A random vector is called Gaussian if it induces a Gaussian distribution, i.e. for $A\subset X$ we have that $\mathbb{P}\del{x\in A}$ defines a Gaussian measure.
+\end{enumerate}
+\end{definition}
+
+We can now generalise Propositions \ref{prop:gauss_ft} and \ref{prop:n_gauss_ft} to an arbitrary Banach space.
+
+\begin{theorem}[\cite{Bogachev1998}]
+\label{the:arb_gauss_ft}
+A measure $\gamma$ on a Banach space is Gaussian if and only if its Fourier transform has the form 
+\begin{equation}
+    \label{eq:arb_gauss_ft}
+    \hat\gamma(f) = \exp\brac{iL(f)- \frac12 B(f,f)},
+\end{equation} where $L:X^*\to\R$ is linear, and $B:X^*\times X^*\to\R$ is a symmetric bilinear nonnegative quadratic form.
+\end{theorem}
+The proof of this theorem is very similar to that of \propref{prop:n_gauss_ft}, but we shall present it nonetheless in order to see the subtleties of the argument.
+\begin{proof}
+Firstly suppose that $\gamma$ is a measure on a Banach space $X$, such that the Fourier transform is given by \eqref{eq:arb_gauss_ft}. Then to show that $\gamma$ is Gaussian, it suffices to show that for any $f\in X^*$ the induced measure $\nu = \gamma\circ f^{-1}$ is Gaussian. To do this consider the Fourier transform of $\nu$ below \maths{\hat\nu(t) &= \inte[\R]{\exp\brac{its}}{\nu(s)} \\ &= \inte[X]{\exp\brac{itf(x)}}{\gamma(x)} \\&= \exp\brac{itL(f) - \frac12t^2B(f,f)}.} Hence, by \propref{prop:gauss_ft}, $\nu$ is Gaussian, and therefore $\gamma$ is Gaussian.
+
+On the other hand, suppose that $\gamma$ is a Gaussian measure, in particular for any $f\in X^*$, we have that $\nu = \gamma\circ f^{-1}$ is Gaussian on $\R$ with mean and variance given by $a(f)$ and $\sigma^2(f)$ respectively. Consider \maths{\hat\gamma(f) &= \inte[X]{\exp\brac{if(x)}}{\gamma(x)} \\&= \inte[\R]{\exp\brac{ix}}{\nu(x)} \\&= \exp\brac{ia(f) - \frac12\sigma^2(f)},} where the last equality follows from \propref{prop:gauss_ft}.
+
+Moreover, notice that \maths{a(f) &= \inte[\R]{x}{\nu(x)} = \inte[X]{f(x)}{\gamma(x)}, \\ \sigma^2(f) &= \inte[\R]{\brac{x - a(f)}^2}{\nu(x)} = \inte[X]{\brac{f(x) - a(f)}^2}{\gamma(x)}.} So $f\mapsto a(f)$ defines a linear map, and $f\mapsto \sigma^2(f)$ defines a nonnegative quadratic form, so taking $L(f) = a(f)$ and $B(f,f) = \sigma^2(f)$ gives \eqref{eq:arb_gauss_ft}.
+\end{proof}
+
+In the proof of the previous theorem, it was required to show that the objects $L$ and $B$ existed, and in doing so, we defined $a(f)$ and $\sigma^2(f)$ to be the mean and variance of the induced measure $\nu = \gamma\circ f^{-1}$ and argued that these satisfied the requirements. In the next definition we consolidate this and formally define the mean and covariance of a Gaussian measure.
+
+\begin{definition}
+\label{def:mean_cov_gauss}
+Let $X$ be a Banach space and let $\gamma$ be a measure on $\E(X)$ such that $X^*\subset L^2(\gamma)$. The element $a_\gamma\in (X^*)'$ defined by \maths{a_\gamma(f) = \inte[X]{f(x)}{\gamma(x)}} is the \emph{mean} of $\gamma$. If $a_\gamma(f) = 0$ for all $f\in X^*$, then we say that $\gamma$ is \emph{centred}.
+
+The operator $R_\gamma:X^*\to (X^*)'$ defined by \maths{R_\gamma(f)(g) = \inte[X]{\bigsbrac{f(x) - a_\gamma(f)}\bigsbrac{g(x) - a_\gamma(g)}}{\gamma(x)}} is the \emph{covariance operator} of $\gamma$. The corresponding quadratic form on $X^*$ is called the covariance of $\gamma$.
+\end{definition}
+
+\begin{remark}
+Notice in the above definition, the appearance of $(X^*)'$. Here, $Y^*$ denotes the \emph{continuous dual} of an arbitrary Banach space $Y$, while $Y'$ denotes the \emph{algebraic dual}, in particular an element of the algebraic dual need not be continuous.
+\end{remark}
+
+It is worth remarking at this point that in the $n$-dimensional cases, we have means and covariances which are independent of $f\in(\R^n)^*$, whereas, in the arbitrary Banach space setting, we see a dependence on $f\in X$. This discrepancy is a result of not setting a basis in an arbitrary Banach space, whereas in $\R^n$ we can work with a specific basis, and so write the mean and covariance without a dependence on $f$.
+
+Next we introduce a proposition that will allow us to characterise centred Gaussian measures.
+\begin{proposition}
+\label{prop:centred_gaussians}
+Let $\gamma$ be a centred Gaussian measure on the $\sigma$-algebra $\E(X)$ of a Banach space $X$. Then for every real $\varphi$, the image of $\gamma\otimes\gamma$ under the mapping \maths{\fullfunction{\alpha_\varphi}{X\times X}{X}{\del{x,y}}{x\sin\varphi + y\cos\varphi}} coincides with $\gamma$.
+\end{proposition}
+\begin{proof}
+It suffices to show that the Fourier transform of $\gamma\otimes\gamma$ under the above mapping is equal to $\hat\gamma$. To this end, consider \maths{\widehat{\gamma\otimes\gamma\circ\alpha_\varphi^{-1}}(f) &= \iinte[X\times X]{\exp\del{if\del{x\sin\varphi + y\sin\varphi}}}{\gamma(x)}{\gamma(y)} \\ &= \inte[X]{\exp\del{if\del{x\sin\varphi}}}{\gamma(x)}\inte[X]{\exp\del{if\del{y\cos\varphi}}}{\gamma(y)} \\ &= \inte[\R]{\exp\del{ix\sin\varphi}}{\gamma\circ f^{-1}(x)}\inte[\R]{\exp\del{iy\cos\varphi}}{\gamma\circ f^{-1}(y)} \\ &= \exp\del{i\del{\sin\varphi + \cos\varphi}a_\gamma(f)-\frac{1}{2}\del{\sin^2\varphi + \cos^2\varphi}\sigma^2(f)}.} Since $\gamma$ is centred, $a_\gamma(f) = 0$, therefore, by \thmref{the:arb_gauss_ft}, \maths{\widehat{\gamma\otimes\gamma\circ\alpha_\varphi^{-1}}(f) = \hat\gamma(f)} as required.
+\end{proof}
+
+\subsection{Brownian motion and the Wiener measure}
+Here, we will introduce an instructive example of a Gaussian measure in infinite dimensions, and one that will be useful later in this dissertation. Let us begin by introducing Brownian motion.
+\begin{definition}
+\label{def:brownian_motion_1}
+A real valued stochastic process $B = \cbr{B_t}_{t\geq0}$ defined on a probability space $\del{\Omega,\Sigma,P}$ is called a \emph{Brownian motion} if it satisfies \begin{enumerate}
+    \item $B_0 = 0$ almost surely;
+    \item For all $0 \leq t_0<t_1<\cdots<t_n$, the increments $B_{t_1} - B_{t_0}, B_{t_2} - B_{t_1}, \cdots, B_{t_n}-B_{t_{n-1}}$ are mutually independent;
+    \item If $0\leq s<t$, then $B_{t-s}\sim\mathcal{N}(0,t-s)$;
+    \item The map $t\mapsto B_t$ is continuous almost surely.
+\end{enumerate}
+\end{definition}
+
+Now let us consider the space of continuous functions from the closed unit interval, $\intcc{0,1}$, to $\R$, $C\intcc{0,1}$, equipped with the $\sigma$-algebra $\mathscr{C}$ such that all coordinate maps $w\mapsto w(t)$, from $C\intcc{0,1}$ into $\R$, are measurable for all $t\in\intcc{0,1}$. Given a Brownian motion $B = \cbr{B_t}_{t\geq0}$, we may consider the mapping defined by \maths{\del{\Omega,\Sigma,P}&\to C\intcc{0,1} \\ \omega&\mapsto\del{t\mapsto B_t(\omega)},} where $\del{\Omega,\Sigma,P}$ is a probability space and $B_t(\omega)$ denotes a sample path of the Brownian motion. The \emph{Wiener measure}, $P^W$ on $\del{C\intcc{0,1},\mathscr{C}}$, is then defined to be the image of $P$ under this mapping. In particular, if we have a set $A\subset C\intcc{0,1}$, then we have \maths{P^W(A) = P\del{B_*\in A},} where $B_*$ denotes the map $\del{t\mapsto B_t(\omega)}\in C\intcc{0,1}$. Furthermore, it is a (non-trivial) fact that there exists a probability space $\del{\Omega,\Sigma, P}$ with a Brownian motion defined on it, and moreover, the measure $P^W$ is independent of our choice of $\del{\Omega,\Sigma,P}$ and the Brownian motion, $B$ (see Theorem 14.5 of Kallenberg's `Foundations of Modern Probability' \cite{Kallenberg2021}).
+
+Now suppose that $A\subset C\intcc{0,1}$ is of the form \maths{A = \cbr{f\in C\intcc{0,1}:f(t_0)\in A_0,\cdots, f(t_k)\in A_k},} where $0=t_0<t_1<\cdots<t_k$ and $A_0,\cdots,A_k\in\Bor(\R)$. Then, from \defnref{def:brownian_motion_1}, we can see that \maths{P^W(A) &= P\del{B_{t_0}\in A_0,\cdots, B_{t_k}\in A_k} \\ &= \1_{A_0}(0)\inte[A_1\times\cdots\times A_k]{p_{t_1}(x_1)p_{t_2-t_1}(x_2-x_1)\cdots p_{t_k-t_{k-1}}(x_k - x_{k-1})}{x},} where $p_t(x):= p(x,0,t)$ from \defnref{def:gauss_1d} is the Gaussian density in one dimension. We then call the probability space $\del{C\intcc{0,1},\mathscr{C},P^W}$ the \emph{Wiener space}.
+
+\section{Notation}
+We end this chapter by introducing some useful notation that we will come across again later in our discussion of the Cameron-Martin space and theorem. Let $\gamma$ be a Gaussian measure on a Banach space $X$, then we denote by $X_\gamma^*$ the closure of the set \maths{\cbr{f - a_\gamma(f):f\in X^*}} embedded into $L^2(\gamma)$ with respect to the corresponding norm. 
+
+Notice that we can also define $R_\gamma:X_\gamma^*\to (X^*)'$ by having \maths{R_\gamma(f)(g) = \inte[X]{f(x)\sbr[2]{g(x) - a_\gamma(g)}}{\gamma(x)}.} For centred measures, this is just an extension from $X^*$ to $X_\gamma^*$. But for any $f\in X^*$, we have $R_\gamma(f)$ coincides with $R_\gamma\brac{f-a_\gamma(f)}$. 
+
+If it is the case that $R_\gamma(f)$, with $f\in X_\gamma^*$ is generated by an element of the initial space $X$ - for example in the $n$-dimensional case - then $\abrac{R_\gamma(f),l} = \abrac{l,R_\gamma(f)}$ for all $l\in X^*$.
+    
+\end{document}

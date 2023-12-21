@@ -1,0 +1,257 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+In this chapter, we will derive a `calculus' for random variables defined on a Gaussian probability space, so called \emph{Malliavin calculus}. This is a tool particularly useful in the analysis of stochastic differential equations, or Quantum Field Theory. We will introduce Malliavin calculus, and explore a number of theorems and applications.
+
+\section{Gaussian analysis on \texorpdfstring{$\R$}{R}}
+As was the case when first introducing Gaussian measures, Malliavin calculus will be discussed first in the $1$-dimensional setting, so that we can build an intuition before introducing it for arbitrary Gaussian measures. In this spirit, let us consider the probability space $\del{\R,\Bor(\R),\gamma_1}$, where $\Bor(\R)$ is the Borel $\sigma$-algebra on $\R$, and $\gamma_1$ is the standard Gaussian measure on $\R$. Now let us introduce two differential operators on $C^1\del{\R}$ as follows \begin{itemize}
+    \item \emph{Derivative operator}: for $f\in C^1\del{\R}$ define \maths{\Dif f(x) := f'(x).}
+    \item \emph{Divergence operator}: for $f\in C^1\del{\R}$ define \maths{\delta f(x) := xf(x) - f'(x).}
+\end{itemize}
+Firstly notice that if we have $f,g\in C^1_p\del{\R}$, and we consider the $L^2\del{\gamma_1}$ inner product, then we have the following \maths{\abrac{\Dif f,g}_{L^2(\gamma_1)} &= \inte[\R]{f'(x)g(x)}{\gamma_1(x)} \\ &= \frac{1}{\sqrt{2\pi}}\inte[\R]{f'(x)g(x)e^{-\frac12x^2}}{x} \\ &= \inte[\R]{f(x)\sbr{g(x) - xg'(x)}}{\gamma_1(x)} \\ &= \abrac{f,\delta g}_{L^2(\gamma_1)},} where the third equality is a simple application of integration by parts and noticing that both $f$ and $g$ are bounded by assumption. In particular we have the following lemma.
+\begin{lemma}
+\label{lem:1d_operator_adjoint}
+The operators $\Dif$ and $\delta$ are adjoint on $C^1_p(\R)$ with respect to the measure $\gamma_1$.
+\end{lemma}
+
+We also have the following lemma regarding the commutativity of the operators.
+\begin{lemma}
+\label{lem:1d_operator_comm}
+Let $f\in C^n(\R)$, then \maths{\del{\Dif\delta^n - \delta^n\Dif}f = n\delta^{n-1}f.}
+\end{lemma}
+\begin{proof}
+The proof follows by induction. First notice that for $k = 1$, we have \maths{\Dif\delta f &= \Dif\sbr{xf(x) - f'(x)} = f(x) + xf(x) - f''(x);\\ \delta\Dif f &= \delta f'(x) = xf(x) - f''(x).} It follows that $\del{\Dif\delta - \delta\Dif}f = f$. For the inductive step, suppose that this relation holds for $1\leq k\leq n$, then we may consider \maths{\Dif\delta^nf &= \Dif\delta\del{\delta^{n-1}f} \\ &= \delta\Dif\del{\delta^{n-1}f} + \delta^{n-1}f \\ &= \delta\del{\delta^{n-1}\Dif f + (n-1)\delta^{n-2}f} + \delta^{n-1}f \\ &= \delta^n\Dif f + n\delta^{n-1}f,} giving the desired result.
+\end{proof}
+
+We now introduce a system of polynomials with some very helpful properties for what we would like to achieve in this chapter. These are the Hermite polynomials defined formally below.
+\begin{definition}
+\label{def:1d_hermite}
+Let $H_0 = 1$, then we define the $n$-th \emph{Hermite polynomial} by \maths{H_n := \delta^n1.}
+\end{definition}
+Firstly, it is worth verifying that these are indeed polynomials. For example, let us consider some small cases of $n$, then we have \maths{H_1(x) &= \delta1(x) = x, \\ H_2(x) &= \delta^21(x) = \delta\del{x} = x^2 - 1, \\ H_3(x) &= \delta^31(x) = \delta\del{x^2 - 1} = x^3 - 3x.} It is therefore easy to see that Hermite polynomials are aptly named, moreover, we notice that the leading coefficient of each polynomial is $1$. Secondly, notice that we have the following equality \maths{H_n' = \Dif\delta^n 1 = \delta^n\Dif 1 + n\delta^{n-1}1 = nH_{n-1}.} In particular this gives the following recursion relation for Hermite polynomials \maths{H_{n+1}(x) = \delta H_n(x) = xH_n(x) - H_n'(x) = xH_n(x) - nH_{n-1}(x).}
+
+The next proposition motivates our interest in Hermite polynomials.
+\begin{proposition}
+\label{prop:Hermite_basis}
+The sequence of normalised Hermite polynomials $\cbr{\frac{1}{\sqrt{n!}}H_n}_{n\geq0}$ defines a complete orthonormal basis of $L^2(\gamma_1)$.
+\end{proposition}
+\begin{proof}
+For orthonormality, consider the inner product \maths{\abrac{H_n,H_m}_{L^2(\gamma_1)} &= \abrac{H_n,\delta^m 1}_{L^2(\gamma_1)} = \abrac{\Dif H_n,\delta^{m-1}1}_{L^2(\gamma_1)} = n\abrac{H_{n-1},H_{m-1}}_{L^2(\gamma_1)}.} In particular, by repeating the above, we have that if $n=m$, then \maths{\abrac{H_n,H_n}_{L^2(\gamma_1)} = n!\abrac{1,1}_{L^2(\gamma_1)} = n!.} On the other hand, without loss of generality, suppose that $n>m$, then \maths{\abrac{H_n,H_m}_{L^2(\gamma_1)} = \frac{n!}{m!}\abrac{H_{n-m},1}_{L^2(\gamma_1)} = 0.}
+
+For completeness, suppose that $f\in L^2(\gamma_1)$ is such that $\abrac{f,H_n}_{L^2(\gamma_1)} = 0$ for all $n\in \N_0$. Then since the leading coefficient of each $H_n$ is $1$, we have that $\abrac{f,x^n}_{L^2(\gamma_1)} = 0$ for all $n\in\N_0$. Therefore, considering the fourier transform of $f$, we have \maths{\hat f(t) &= \inte[\R ]{f(x)e^{itx}}{\gamma_1(x)} = \sum_{n\geq0}\frac{\del{it}^n}{n!}\inte[\R ]{f(x)x^n}{\gamma_1(x)} = 0.} By Lebesgue's dominated convergence, the swapping of the sum and the integral is justified. Therefore, we have that $\hat f(t) = 0$, implying that $f = 0$.
+\end{proof}
+
+The immediate implication of \propref{prop:Hermite_basis} is that given an $f\in L^2(\gamma_1)$, we can decompose it as below \maths{f = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}H_n.} Specifically, we can write the function $e^{ax}$ as follows \maths{e^{ax} &= \sum_{n\geq0}\frac{1}{n!}\abrac{e^{a\cdot},H_n}_{L^2(\gamma_1)}H_n(x) \\ &= \sum_{n\geq0}\frac{a^n}{n!}\abrac{e^{a\cdot},1}_{L^2(\gamma_1)}H_n(x)} since $\delta$ and $\Dif$ are adjoint. Finally, noting that $\abrac{e^{a\cdot},1}_{L^2(\gamma_1)} = e^{\frac12a^2}$, we have that 
+\begin{equation}
+    \label{eq:1d_exp_decomposition}
+    e^{ax - \frac12a^2} = \sum_{n\geq0}\frac{a^n}{n!}H_n(x).
+\end{equation}
+
+\subsection{Ornstein-Uhlenbeck operator}
+We now introduce the \emph{Ornstein-Uhlenbeck operator}, $L$, a second order differential operator defined via 
+\begin{equation}
+    \label{eq:1d_OU_operator}
+    Lf := -\delta\Dif f = -xf'(x) + f''(x).
+\end{equation}
+
+At this point, we really begin to see the value of Hermite polynomials. In particular, let us consider applying the Ornstein-Uhlenbeck operator to $H_n$ as follows \maths{LH_n = -\delta\Dif H_n = -n\delta H_{n-1} = -nH_n.} In other words, $H_n$ is an eigenvector of $L$ with eigenvalue $-n$.
+
+Now let us introduce the the operators $\cbr{P_t}_{t\geq0}$ defined by $P_tH_n = e^{-nt}H_n$. Then it is easy to see that this defines a semigroup with the operation $P_tP_s = P_{t+s}$, in fact, this is called the \emph{Ornstein-Uhlenbeck semigroup}. Suppose we have a function $f\in L^2(\gamma_1)$, then the Ornstein-Uhlenbeck semigroup acts on $f$ by \maths{P_tf = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}e^{-nt}H_n.} Moreover, we have that \maths{\dod{}{t}P_tf = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}\sbr{-ne^{-nt}H_n} = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}L\del{e^{-nt}H_n} = LP_tf,} so we see that $L$ is the generator of the Ornstein-Uhlenbeck semigroup, justifying the name.
+
+The following gives us an equivalent characterisation of the Ornstein-Uhlenbeck semigroup, and arguably a more familiar one.
+\begin{proposition}
+\label{prop:1d_Mehler}
+For any $f\in L^2(\gamma_1)$, the following holds \maths{P_tf(x) = \inte[\R ]{f\del{e^{-t}x + \sqrt{1-e^{-2t}}y}}{\gamma_1(y)} = \Ex_{\gamma_1}\sbr{e^{-t}x + \sqrt{1-e^{-2t}}Y},} where $Y\sim \mathcal{N}\del{0,1}$.
+\end{proposition}
+\begin{proof}
+Since $\cbr{e^{ax}}_{a\in\R}$ is a complete system in $L^2(\gamma_1)$, it suffices to prove the claim on these functions. To this end, consider \maths{\inte[\R ]{e^{axe^{-t} + a\sqrt{1-e^{2t}}y}}{\gamma_1(y)} &= e^{axe^{-t} + \frac12a^2\del{1 - e^{-2t}}} \\ &= e^{\frac12a^2}e^{ae^{-t}x - \frac12\del{ae^{-t}}^2}.} Now by \eqref{eq:1d_exp_decomposition}, we see that \maths{\inte[\R ]{e^{axe^{-t} + a\sqrt{1-e^{2t}}y}}{\gamma_1(y)} &= e^{\frac12a^2}\sum_{n\geq0}\frac{a^ne^{-nt}}{n!}H_n(x) \\ &= e^{\frac12a^2}P_t\del{e^{ax - \frac12a^2}} \\ &= P_te^{ax}.} So indeed the two operators coincide on $\cbr{e^{ax}}_{a\in\R}$, hence they coincide on $L^2(\gamma_1)$.
+\end{proof}
+
+\section{Gaussian analysis on \texorpdfstring{$\R^n$}{Rn}}
+Similarly to the $1$-dimensional case, let us consider the probability space $\del{\R^n,\Bor(\R^n),\gamma_n}$, where $\Bor(\R^n)$ is the Borel $\sigma$-algebra on $\R^n$, and $\gamma_n$ is the standard Gaussian measure on $\R^n$. We then generalise the derivative and divergence operators from the previous section as follows:
+\begin{itemize}
+    \item For $f:\R^n\to\R$, we define the derivative operator, $\Dif$, by \maths{\Dif f := \nabla f = \del{\pd{f}{x_1},\cdots,\pd{f}{x_n}}.}
+    \item For $u:\R^n\to\R^n$, we define the divergence operator, $\delta$, by \maths{\delta u := \sum_{1\leq i\leq n}u_ix_i - \pd{u_i}{x_i} = \abrac{u,x} - \nabla\cdot u,} where the inner product is the standard inner product on $\R^n$.
+\end{itemize}
+It is easy to see that the previous definitions are just special cases of the new definitions. Indeed, the similarities go further in the following proposition.
+\begin{proposition}
+\label{prop:nd_adjoint}
+The operators $\Dif$ and $\delta$ are adjoint. That is to say that for $f:\R^n\to\R$ and $u:\R^n\to\R^n$, we have \maths{\Ex\del{\abrac{\Dif f, u}} = \Ex\del{f\delta u}.}
+\end{proposition}
+\begin{proof}
+In this proof, first notice that the density of $\gamma_n$ with respect to the Lebesgue measure on $\R^n$ is given by \maths{p(x) = \frac{1}{\sqrt{2\pi}}\exp\del{-\frac{1}{2}\norm{x}^2}.} It is then easy to check that \maths{\dpd{p}{x_i}(x) = -x_ip(x).} Let us then consider the expectation \maths{\Ex\del{\abrac{\Dif f,u}} &= \inte[\R^n]{\abrac{\Dif f,u}}{\gamma_n} \\ &= \sum_{1\leq i\leq n}\inte[\R^n]{\pd{f}{x_i}(x)u_i(x)p(x)}{x} \\ &= \sum_{1\leq i\leq n}\inte[\R^n]{f(x)\sbr{u_i(x)x_i - \pd{u_i}{x_i}(x)}p(x)}{x} \\ &= \inte[\R^n]{f\delta u}{\gamma_n} \\ &= \Ex\del{f\delta u}.}
+\end{proof}
+
+\section{Gaussian analysis on the Wiener space}
+Until this point, we have only considered real-valued functions defined on $\R^n$ with the standard Gaussian measure $\gamma_n$, and as such, much of what has been done has been introducing new concepts in a familiar setting. Our goal is to develop a calculus for random variables, and this will require a more abstract setting, which shall be introduced below.
+\subsection{Brownian motion and the Wiener integral}
+Recall the definition of Brownian motion.
+\begin{definition}
+\label{def:brownian_motion}
+A real valued stochastic process $B = \cbr{B_t}_{t\geq0}$ defined on defined on a probability space $\del{\Omega,\Sigma,P}$ is called a \emph{Brownian motion} if it satisfies \begin{enumerate}
+    \item $B_0 = 0$ almost surely;
+    \item For all $0 \leq t_0<t_1<\cdots<t_n$, the increments $B_{t_1} - B_{t_0}, B_{t_2} - B_{t_1}, \cdots, B_{t_n}-B_{t_{n-1}}$ are mutually independent;
+    \item If $0\leq s<t$, then $B_{t-s}\sim\mathcal{N}(0,t-s)$;
+    \item The map $t\mapsto B_t$ is continuous almost surely.
+\end{enumerate}
+\end{definition}
+
+Now let us consider the space $H = L^2\del{\intcc{0,1},\R}$, the continuous, real-valued, square integrable functions from $\intcc{0,1}$ into $\R$. For this discussion, any separable Hilbert space will suffice, however, the $H$ we have defined will be useful later, and it is more constructive to work with a concrete example. Furthermore, suppose that $\cbr{e_n}_{n\in\N}$ is a orthonormal basis for $H$, so that for $h\in H$, we may write \maths{h = \sum_{n\in\N}h_ne_n,} where $h_n = \abrac{h,e_n}_H$. Now let us define a linear map $W:H\to L^2(\Omega, P)$, where $\del{\Omega,P}$ is a probability space such that $W(e_n) = \xi_n$, where $\xi_n$ is a standard Gaussian random variable, in other words $\xi_n$ can be thought of as being distributed as $\xi_n\sim\mathcal{N}(0,1)$. This map is called \emph{Gaussian white noise}. Then for arbitrary $h\in H$, we have \maths{W(h) = \sum_{n\in\N} h_n\xi_n.} It is then clear that \maths{\Ex W(h) = 0 , \ \ \ \text{and} \ \ \  \Ex W(h)W(g) = \abrac{h,g}_H.}
+
+Let us now consider the function $\1_{\intco{0,t}}\in H$ (this is where our specific choice of $H$ is important), and define $B_t := W\del{\1_{\intco{0,t}}}$. Now notice that $\Ex B_t = 0$, and moreover, \maths{\Ex\sbr{B_tB_s} &= \Ex\sbr{W\del{\1_{\intco{0,t}}}W\del{\1_{\intco{0,s}}}} \\ &= \abrac{\1_{\intco{0,t}},\1_{\intco{0,s}}}_H \\ &= t\wedge s.} It follows that $\cbr{B_t}_{t\geq0}$ is a Brownian motion. 
+
+Now let us consider the $\span\cbr{\1_{\intco{0,t}}}_{t\geq0}$. Then it is easy to see that this is the set of step functions from $\intcc{0,1}$ into $\R$, in other words, it is the set of functions of the form \maths{\varphi_t = \sum_{0\leq k\leq n-1}\alpha_k\1_{\intco{t_k,t_{k+1}}}(t),} where $0 \leq t_0 <t_1<\cdots <t_n$ is a partition of some interval, and $\cbr{\alpha_k}_{0\leq k\leq n-1}\subset\R$. We can then define the \emph{Wiener integral} to be \maths{\inte[\intcc{0,1}]{\varphi_t}{B_t} := \sum_{0\leq k\leq n-1}\alpha_k\del{B_{t_{k+1}} - B_{t_k}}.} By linearity, it is easy to see that \maths{\inte[\intcc{0,1}]{\varphi_t}{B_t} = W(\varphi).} At this point, let us remark on some properties of the Wiener integral. Firstly, it has an expectation of $0$, clearly \maths{\Ex\sbr{\inte[\intcc{0,1}]{\varphi_t}{B_t}} = \Ex\sbr{W(\varphi)} = 0.} Furthermore, we can consider the second moment \maths{\Ex\sbr{\inte[\intcc{0,1}]{\varphi_t}{B_t}}^2 = \Ex\sbr{W(\varphi)}^2 = \abrac{\varphi,\varphi}_H = \norm{\varphi}_H^2.} In particular $\inte[\intcc{0,1}]{\varphi_t}{B_t}$ is a Gaussian random variable with mean $0$ and variance $\norm{\varphi}_H^2$.
+
+Finally, notice that $\span\cbr{\1_{\intco{0,t}}}_{t\geq0}$ is a dense subspace of $H = L^2(\intcc{0,1},\R)$. Therefore, we can extend the Wiener integral to a linear isometry \maths{h\mapsto\inte[\intcc{0,1}]{h(t)}{B_t}} between $L^2(\intcc{0,1},\R)$ and the Gaussian subspace of $L^2(\Omega)$ spanned by $\cbr{W\del{\1_{\intco{0,t}}}}_{t\in\intcc{0,1}}$. Furthermore, the Wiener integral of $h\in H$ agrees with $W(h)$, and it is a Gaussian random variable with expectation $0$ and variance $\norm{h}_H^2$.
+
+\subsection{The Malliavin derivative}
+In this section, we consider the same Hilbert space $H = L^2(\intcc{0,1},\R)$, and the same probability space as before $\del{\Omega,\Sigma,P}$, where $\Sigma$ is the $\sigma$-algebra generated by the Brownian motion, $\cbr{B_t}_{t\geq0}$, we constructed above. Now denote by $\S$ the set of smooth, cylindrical random variables of the form \maths{F = f\del{W(h_1),\cdots,W(h_n)},} for some $f\in C^\infty\del{\R^n}$ and $h_i\in H$. 
+
+We will now define the Malliavin derivative on $\S$.
+\begin{definition}
+\label{def:Mall_deriv}
+Let $F\in\S$, then we define the \emph{Malliavin derivative}, $\Dif F$, to be the $H$-valued random variable \maths{\Dif_t F := \sum_{1\leq i\leq n}\dpd{f}{x_i}\del{W(h_1),\cdots,W(h_n)}h_i(t).}
+\end{definition}
+For example, we have that $\Dif W(h) = h$, and in particular, we have $\Dif B_t = \1_{\intco{0,t}}$ for all $t\geq0$. Furthermore, since $S$ is dense in $L^2(\Omega)$, $\Dif$ extends uniquely to an operator on all of $L^2(\Omega)$.
+
+On the other hand, if we consider $\S_H$ to be the class of smooth and cylindrical stochastic processes of the form \maths{u_t = \sum_{1\leq j\leq n}F_jh_j(t),} for $F_j\in \S$ and $h_j\in H$. Then we can define an analogy to the divergence operator seen previously. 
+\begin{definition}
+\label{def:Mall_div}
+Let $u\in \S_H$, then we define the \emph{divergence}, $\delta u$, of $u$ to be the random variable given by \maths{\delta u := \sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}.}
+\end{definition}
+For example, for $h\in H$, we have that $\delta h = W(h)\in L^2(\Omega)$.
+
+Following our previous discussion of these operators on $\R^n$, it is natural to ask whether they are adjoint, and indeed it turns out that this is the case, as we shall see in the next proposition.
+\begin{proposition}
+\label{prop:Mall_adjoint}
+Let $F\in\S$ and $u\in\S_H$, then $\Dif$ and $\delta$ are adjoint. In other words \maths{\Ex\del{\abrac{\Dif F,u}_H} = \Ex\del{F\delta(u)}.}
+\end{proposition}
+\begin{proof}
+The proof of this follows a very similar argument to that of \propref{prop:nd_adjoint}, indeed the statements are almost identical. First we may assume that \maths{F &= f\del{W(h_1),\cdots, W(h_n)}, \\ u &= \sum_{1\leq j\leq n}g_j\del{W(h_1),\cdots,W(h_n)}h_j,} where $f,g_j\in C_p^\infty(\R^n)$, and $\cbr{h_j}_{1\leq j\leq n}$ are orthonormal elements of $H$. The orthnormality assumption follows by linearity of $W$, and the Gram-Schmidt procedure.
+
+So letting $p(x)$ denote the density of the $n$-dimensional standard Gaussian measure with respect to the Lebesgue measure, we can consider \maths{\Ex\del{\abrac{\Dif F,u}_H} &= \inte[\R^n]{\abrac{\Dif F,u}_H}{\gamma_n} \\ &= \inte[\R^n]{\sum_{1\leq j,k\leq n}g_j(x)\pd{f}{x_k}(x)\abrac{h_k,h_j}}{\gamma_n} \\ &= \sum_{1\leq j\leq n}\inte[\R^n]{g_j(x)\pd{f}{x_j}(x)p(x)}{x} \\&= \sum_{1\leq j\leq n}\inte[\R^n]{f(x)\sbr{x_jg_j - \pd{g_j}{x_j}}p(x)}{x} \\ &= \inte[\R^n]{F\delta u}{\gamma_n} \\ &= \Ex\del{F\delta(u)}.} In the third equality above, we use the orthonormality of $\cbr{h_j}_{1\leq j\leq n}$ to reduce the problem to the $n$-dimensional case.
+\end{proof}
+
+Below, we make note of some basic properties of the derivative and divergence operators.
+\begin{proposition}
+\label{prop:operator_properties}
+Let $u,v\in\S_H$, $F\in\S$, and $h\in H$. Then if $\cbr{e_i}_{i\in\N}$ is an orthonormal basis for $H$, we have the following 
+\begin{subequations}
+\begin{equation}
+    \label{eq:property1}
+    \Dif_h\del{\delta u} = \abrac{u,h}_H + \delta\del{\Dif_hu};
+\end{equation}
+\begin{equation}
+    \label{eq:property2}
+    \Ex\del{\delta(u)\delta(v)} = \Ex\del{\abrac{u,v}_H} + \Ex\del{\sum_{i,j\in\N}\Dif_{e_i}\abrac{u,e_j}_H\Dif_{e_j}\abrac{v,e_j}_H}.
+\end{equation}
+\end{subequations}
+Where we write $\Dif_h F = \abrac{\Dif F,h}_H$.
+\end{proposition}
+\begin{proof}
+To prove \eqref{eq:property1}, suppose that \maths{u = \sum_{1\leq j\leq n}F_jh_j,} for some $h_j\in H$. Moreover, noting that $\Dif_hW(h_j) = \abrac{h_j,h}_H$, then we have \maths{\Dif_h\del{\delta u} &= \Dif_h\del{\sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}} \\ &= \sum_{1\leq j\leq n}F_j\abrac{h_j,h}_H + \sum_{1\leq j\leq n}\del{\Dif_h F_jW(h_j) - \abrac{\Dif_h(\Dif F_j),h_j}_H} \\ &= \abrac{u,h}_H + \delta\del{\Dif_hu}.} 
+
+To prove \eqref{eq:property2}, first let us rewrite \maths{\Ex\del{\delta(u)\delta(v)} = \Ex\del{\abrac{v,\Dif(\delta u)}_H} = \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\Dif_{e_i}(\delta u)},} by \propref{prop:Mall_adjoint}. Then using \eqref{eq:property1}, we have \maths{\Ex\del{\delta(u)\delta(v)} &= \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\del{\abrac{u,e_i}_H + \delta(\Dif_{e_i}u)}} \\ &= \Ex\del{\abrac{u,v}_H} + \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\delta(\Dif_{e_i}u)} \\ &= \Ex\del{\abrac{u,v}_H} + \Ex\del{\sum_{i,j\in\N}\Dif_{e_i}\abrac{u,e_j}_H\Dif_{e_j}\abrac{v,e_j}_H},} where the last inequality follows from \propref{prop:Mall_adjoint}, similarly to the first step.
+\end{proof}
+
+\section{Wiener chaos}
+This section aims to construct an orthogonal decomposition of random variables in $L^2(\Omega)$, the so called \emph{Wiener chaos expansion}. We shall do this by using some of the concepts of Malliavin calculus we have developed, in particular, we shall look at the action of the derivative and divergence operators on the Wiener chaos expansion.
+
+\subsection{Isonormal Gaussian processes and Hermite polynomials}
+
+In this section, we shall introduce the basic machinery required to construct an orthogonal decomposition of a probability space. Some aspects have already been introduced previously, but shall be formally restated here, in addition to providing some intuition via examples.
+
+Firstly, we formalise the notion of an isonormal Gaussian process.
+\begin{definition}
+\label{def:iso_gauss_process}
+Let $H$ be a real, separable Hilbert space with inner product $\abrac{\cdot,\cdot}_H$. An \emph{$H$-isonormal Gaussian process} is a family $W = \cbr{W(h):h\in H}$ of real valued random variables defined on a probability space $(\Omega,\Sigma,P)$ such that $W(h)$ is a Gaussian random variable for all $h\in H$ and $\Ex\del{W(h)W(g)} = \abrac{h,g}_H$ for all $h,g\in H$.
+\end{definition}
+The above is quite a verbose definition, but this is something we have already seen when we defined a map $W:L^2(\intcc{0,1})\to L^2(\Omega)$ earlier. In particular, we showed how such a process $W$ could be constructed for an arbitrary separable Hilbert space.
+
+Let us now consider how the Hermite polynomials defined previously interact with isonormal Gaussian processes. First, let us consider the following lemma.
+
+\begin{lemma}
+\label{lem:hermite_orthogonality}
+Let $X,Y$ be standard Gaussian random variables, which are jointly Gaussian. Then for $n,m\geq0$ we have \maths{\Ex\del{H_n(X)H_m(Y)} = \case{0 & \text{if $n\neq m$}\\n!\Ex\del{XY} & \text{if $n=m$}}.}
+\end{lemma}
+\begin{proof}
+Notice that \maths{\Ex\del{H_n(X)H_m(Y)} = \abrac{H_n(X),H_m(Y)}_{L^2(\Omega)}.} But, by a similar argument to that used in the proof of \propref{prop:Hermite_basis}, we have that \maths{\abrac{H_n(Y),H_m(Y)}_{L^2(\Omega)} = \case{0 & \text{if $n\neq m$} \\ n!\abrac{X,Y}_{L^2(\Omega)} & \text{if $n=m$}}.} Finally, noting that $\abrac{X,Y}_{L^2(\Omega)} = \Ex\del{XY}$, completes the proof.
+\end{proof}
+
+\subsection{The Wiener chaos expansion}
+We are now able to begin constructing an orthogonal decomposition of $L^2(\Omega)$. We shall first define the \emph{Wiener chaos decomposition}, before arguing that it is indeed an orthogonal decomposition of $L^2(\Omega)$. To this end, we define the $n$-th Wiener chaos as below.
+\begin{definition}
+\label{def:n_wiener_chaos}
+Let $W$ be an $H$-isonormal Gaussian process. Then we define the \emph{$n$-th Wiener chaos}, $\Wie_n$ to be the closure in $L^2(\Omega,\Sigma,P)$ of the linear span of \maths{\cbr{H_n\del{W(h)}:h\in H, \ \norm{h}_H = 1}.}
+\end{definition}
+In particular, we have that $\Wie_0$ is the space of constants, since $H_0 = 1$. Moreover, we have that $\Wie_1 = \cbr{W(h):h\in H} = W$, since $H_1 = x$.
+
+We would now like to argue that this defines an orthogonal decomposition of $L^2(\Omega)$. Before, doing this though, we require the following lemma from \cite{Nualart2006}.
+\begin{lemma}
+\label{lem:complete_system}
+The set $\cbr{\exp\del{W(h)}:h\in H}$ forms a complete system in $L^2(\Omega,\Sigma,P)$.
+\end{lemma}
+\begin{proof}
+Take $X\in L^2(\Omega,\Sigma,P)$ such that $\Ex\sbr{X\exp\del{W(h)}} = 0$ for all $h\in H$. Then by linearity of $W$, we have \maths{\Ex\sbr{X\exp\del{\sum_{1\leq i\leq n}\alpha_iW(h_i)}} = 0,} for any $\alpha_i\in\R$ and $h_i\in H$. But this implies that the Fourier transform of the measure \maths{\nu(A) = \Ex\sbr{X\1_A\del{W(h_1),\cdots,W(h_n)}}} is $0$ on $\R^m$, therefore $\nu$ is identically $0$. But this implies that for any $B\in\Sigma$, we have $\Ex\sbr{X\1_B} = 0$, implying that $X = 0$. Therefore $\cbr{\exp\del{W(h)}:h\in H}$ forms a complete system in $L^2(\Omega,\Sigma,P)$.
+\end{proof}
+
+\begin{theorem}[Wiener chaos expansion]
+\label{the:wiener_chaos}
+Let $W$ be an $H$-isonormal Gaussian process, then \maths{L^2(\Omega,\Sigma,P) = \bigoplus_{n\in\N_0}\Wie_n,} where $\Sigma$ is the $\sigma$-algebra generated by $W$.
+\end{theorem}
+\begin{proof}
+Firstly, we would like to show that $\cbr{\Wie_n}_{n\in\N_0}$ define orthogonal subspaces. To this end, take $n,m\geq 0$, then since $W$ is a Gaussian process, then for any $h,g$ we have that $W(h),W(g)$ are standard Gaussian random variables, and they are jointly Gaussian. So by \lemref{lem:hermite_orthogonality}, $H_n\del{W(h)}$ and $H_m\del{W(g)}$ are orthogonal. Since this holds for arbitrary $h,g\in H$, we have that $\Wie_n$ and $\Wie_m$ are orthogonal subspaces of $L^2(\Omega,\Sigma,P)$. Since $n,m\geq0$ were arbitrary, we conclude that $\cbr{\Wie_n}_{n\in N_0}$ consists of orthogonal subspaces of $L^2(\Omega,\Sigma,P)$.
+
+Now it remains to show that for any $F\in L^2(\Omega,\Sigma,P)$, we have that $F$ can be decomposed into elements  of $\Wie_n$. Suppose that this were not the case, in particular, there exists $F\in L^2(\Omega,\Sigma,P)$ such that $F$ is orthogonal to $\bigoplus_{n\in N_0}\Wie_n$. In particular, since $\Wie_n$ consists of polynomials of degree $n$ of $W(h)$ for $h\in H$, this implies that $F$ is orthogonal to elements of the form $W(h)^n$ for $n\in N_0$ and $h\in H$. By dominated convergence, this implies that $F$ is orthogonal to $\exp\del{W(h)}$. However, $\cbr{\exp\del{W(h)}}_{h\in H}$ is a complete system in $L^2(\Omega,\Sigma,P)$ by \lemref{lem:complete_system}, therefore, $F=0$, completing the proof.
+\end{proof}
+
+It is worth briefly remarking that, denoting by $J_n$ the projection onto the $n$-th Wiener chaos, \thmref{the:wiener_chaos} can be restated for $F\in L^2(\Omega)$ as \maths{F = \sum_{n\in N_0}J_nF.}
+
+\section{The Ornstein-Uhlenbeck semigroup}
+Part of the motivation, for our purposes, of the Wiener chaos decomposition is that the derivative and divergence operators defined previously behave nicely, in a sense that we shall discuss, on the $n$-th Wiener chaos. This will be important as we reintroduce the Ornstein-Uhlenbeck semigroup in a more general setting.
+
+\subsection{The Ornstein-Uhlenbeck operator}
+Previously, we defined the Ornstein-Uhlenbeck operator $L$ by \eqref{eq:1d_OU_operator}, restated below:
+\maths{Lf:=-\delta\Dif f,} where $\delta$ and $\Dif$ were defined on continuous functions from $\R$ into $\R$, $C^1\del{\R}$. We define the Ornstein-Uhlenbeck operator $\L$ as before with definitions of $\Dif$ and $\delta$ given by \defnref{def:Mall_deriv} and \defnref{def:Mall_div} respectively, in other words for $F\in L^2(\Omega)$ 
+\begin{equation}
+    \label{eq:ornstein_uhlenbeck_operator}
+    \L F = -\delta\Dif F.
+\end{equation}
+We change the notation from $L$ to $\L$ in order to differentiate between the two definitions. Specifically, we use $L$ to refer to the definition given by \eqref{eq:1d_OU_operator}, and $\L$ to refer to the definition given by \eqref{eq:ornstein_uhlenbeck_operator}.
+\begin{proposition}
+\label{prop:OU_on_Wiener_chaos}
+Let $F\in L^2(\Omega)$. Then we have \maths{\L J_nF = -nJ_nF,} where $J_nF$ denotes the projection of $F$ onto $\Wie_n$.
+\end{proposition}
+Before proving the proposition, let us compare this to the action of $L$ on Hermite polynomials. We established that for the $n$-the Hermite polynomial, we have \maths{LH_n = -nH_n.} There are obvious parallels with \propref{prop:OU_on_Wiener_chaos}, where $\Wie_n$ plays the role of $H_n$, this seems sensible given our definition of $\Wie_n$.
+\begin{proof}
+Let $h\in H$, then consider $H_n\del{W(h)}\in\Wie_n$. Then by the properties of Hermite polynomials established previously we have \maths{\L H_n\del{W(h)} &= -\delta\Dif H_n\del{W(h)} \\ &= -\delta\del{H_n'\del{W(h)}h} \\ &= -\delta\del{nH_{n-1}\del{W(h)}h} \\ &= -nH_{n-1}\del{W(h)}W(h) + n(n-1)H_{n-2}\del{W(h)} \\ &= -nH_n\del{W(h)}.} To summarise, we have $\L H_n\del{W(h)} = -nH_n\del{W(h)}$.
+
+Now we consider, $J_nF$ for $F\in L^2(\Omega)$, then since $J_nF\in\Wie_n$, the density of the set \newline $\span\cbr{H_n\del{W(h)}:h\in H}$ in $\Wie_n$, it follows that \maths{\L J_nF = -nJ_nF.}
+\end{proof}
+
+The linearity of $\L$ and \thmref{the:wiener_chaos} then gives the following corollary.
+\begin{corollary}
+\label{cor:OU_on_L2}
+Let $F\in L^2(\Omega)$, then we can we have the identity \maths{\L F = -\sum_{n\in\N_0}nJ_nF.}
+\end{corollary} 
+
+\subsection{The Ornstein-Uhlenbeck semigroup}
+We will now formally define the Ornstein-Uhlenbeck semigroup.
+\begin{definition}
+\label{def:OU_semigroup}
+The \emph{Ornstein-Uhlenbeck semigroup} is the one-parameter operator semigroup $\cbr{T_t}_{t\geq0}$ defined by \maths{T_tF = \sum_{n\in\N_0}e^{-nt}J_nF,} for $F\in L^2(\Omega)$.
+\end{definition}
+
+Now let us consider the following \maths{\dod{}{t}T_tF = \sum_{n\in\N_0}\dod{}{t}e^{-nt}J_nF = \sum_{n\in\N_0}-ne^{-nt}J_nF = \sum_{n\in\N_0}e^{-nt}\L J_nF = \L T_tF.} In other words, we see, as we established for $L$, that $\L$ is the generator of the Ornstein-Uhlenbeck semigroup.
+
+Let us now provide an equivalent characterisation for the Ornstein-uhlenbeck semigroup. In \propref{prop:1d_Mehler} we saw that we could equivalently define the Ornstein-Uhlenbeck semigroup defined on $L^2(\R)$ via \emph{Mehler's formula}. This remains true for the Ornstein-Uhlenbeck semigroup as we have defined it on $L^2(\Omega)$, and in fact the proof is almost identical. First recall that $B = \cbr{B_t}_{t\geq0}$ is a Brownian motion on $\del{\Omega,\Sigma,P}$ such that $\Sigma$ is generated by $B$.
+\begin{proposition}[Mehler's formula]
+\label{prop:arb_Mehler}
+Let $B^1$ and $B^2$ be independent Brownian motions, then for any $F\in L^2(\Omega)$, we have the following identity \maths{T_t F = \Ex_{B^2}\del{F\del{e^{-t}B^1 + \sqrt{1-e^{-2t}}B^2}},} where $\Ex_{B^2}$ denotes the expectation with respect to $B^2$.
+\end{proposition}
+\begin{proof}
+As in \propref{prop:1d_Mehler}, it suffices to prove the claim for random variables of the form $e^{\lambda W(h)}$, as these form a complete system in $L^2(\Omega)$. To this end, notice that \maths{\Ex_{B^2}\del{\exp\del{e^{-t}B^1 + \sqrt{1-e^{-2t}}B^2}} &= \exp\del{e^{-t}W(h) + \frac{1}{2}\lambda^2\del{1-e^{-2t}}} \\ &= e^{\frac12\lambda^2}\sum_{n\in\N_0}\frac{e^{-nt}\lambda^n}{n!}H_n\del{W(h)} \\ &= T_t e^{\lambda W(h)},} where we use \eqref{eq:1d_exp_decomposition} in second and third equalities.
+\end{proof}
+
+\end{document}

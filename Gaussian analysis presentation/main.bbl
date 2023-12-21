@@ -1,0 +1,131 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Bogachev1998}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5ebece6e125c7144950daef6f0932626}{%
+           family={Bogachev},
+           familyi={B\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{fullhash}{5ebece6e125c7144950daef6f0932626}
+      \strng{bibnamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authorbibnamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authornamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authorfullhash}{5ebece6e125c7144950daef6f0932626}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{title}{Gaussian Measures}
+      \field{volume}{62}
+      \field{year}{1998}
+      \verb{doi}
+      \verb 10.1090/surv/062
+      \endverb
+      \verb{urlraw}
+      \verb http://www.ams.org/surv/062
+      \endverb
+      \verb{url}
+      \verb http://www.ams.org/surv/062
+      \endverb
+    \endentry
+    \entry{Kallenberg2021}{book}{}
+      \name{author}{1}{}{%
+        {{hash=f6bb1091b9da51c1ac66f8a4a75fcba9}{%
+           family={Kallenberg},
+           familyi={K\bibinitperiod},
+           given={Olav},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \strng{fullhash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \strng{bibnamehash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \strng{authorbibnamehash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \strng{authornamehash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \strng{authorfullhash}{f6bb1091b9da51c1ac66f8a4a75fcba9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3rd ed. 2021}
+      \field{isbn}{3030618706}
+      \field{issn}{2199-3130}
+      \field{series}{Probability Theory and Stochastic Modelling}
+      \field{title}{Foundations of Modern Probability}
+      \field{volume}{99}
+      \keyw{Mathematics ; Mathematics and Statistics ; Probability Theory and Stochastic Processes}
+    \endentry
+    \entry{Borell2003}{article}{}
+      \name{author}{1}{}{%
+        {{hash=20c1fa70f9fc1eded6e254b280340b2c}{%
+           family={Borell},
+           familyi={B\bibinitperiod},
+           given={Christer},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \strng{fullhash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \strng{bibnamehash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \strng{authorbibnamehash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \strng{authornamehash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \strng{authorfullhash}{20c1fa70f9fc1eded6e254b280340b2c}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1631-073X}
+      \field{journaltitle}{C. R. Math. Acad. Sci. Paris}
+      \field{number}{10}
+      \field{title}{The {E}hrhard inequality}
+      \field{volume}{337}
+      \field{year}{2003}
+      \field{pages}{663\bibrangedash 666}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1016/j.crma.2003.09.031
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.crma.2003.09.031
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.crma.2003.09.031
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
