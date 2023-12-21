@@ -1,0 +1,100 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Bogachev1998}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5ebece6e125c7144950daef6f0932626}{%
+           family={Bogachev},
+           familyi={B\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{fullhash}{5ebece6e125c7144950daef6f0932626}
+      \strng{bibnamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authorbibnamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authornamehash}{5ebece6e125c7144950daef6f0932626}
+      \strng{authorfullhash}{5ebece6e125c7144950daef6f0932626}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{9}
+      \field{title}{Gaussian Measures}
+      \field{volume}{62}
+      \field{year}{1998}
+      \verb{doi}
+      \verb 10.1090/surv/062
+      \endverb
+      \verb{urlraw}
+      \verb http://www.ams.org/surv/062
+      \endverb
+      \verb{url}
+      \verb http://www.ams.org/surv/062
+      \endverb
+    \endentry
+    \entry{CM1944}{article}{}
+      \name{author}{2}{}{%
+        {{hash=5d89c5744a9c7d8e2c805503fcdad953}{%
+           family={Cameron},
+           familyi={C\bibinitperiod},
+           given={R.\bibnamedelimi H.},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=6d8a82e2f4a95e559b7e09b6ed53dbf6}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={W.\bibnamedelimi T.},
+           giveni={W\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{163a9fe2015e5314d3cb723953719901}
+      \strng{fullhash}{163a9fe2015e5314d3cb723953719901}
+      \strng{bibnamehash}{163a9fe2015e5314d3cb723953719901}
+      \strng{authorbibnamehash}{163a9fe2015e5314d3cb723953719901}
+      \strng{authornamehash}{163a9fe2015e5314d3cb723953719901}
+      \strng{authorfullhash}{163a9fe2015e5314d3cb723953719901}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0003-486X}
+      \field{journaltitle}{Ann. of Math. (2)}
+      \field{title}{Transformations of {W}iener integrals under translations}
+      \field{volume}{45}
+      \field{year}{1944}
+      \field{pages}{386\bibrangedash 396}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.2307/1969276
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2307/1969276
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2307/1969276
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

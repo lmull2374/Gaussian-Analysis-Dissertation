@@ -1,0 +1,15 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'chapters/Cameron-martin space.blg'
+[94] biber-darwin:340> INFO - === Thu Dec 21, 2023, 16:51:18
+[111] Biber.pm:415> INFO - Reading 'chapters/Cameron-martin space.bcf'
+[220] Biber.pm:952> INFO - Found 2 citekeys in bib section 0
+[238] Biber.pm:4340> INFO - Processing section 0
+[252] Biber.pm:4531> INFO - Looking for bibtex format file 'Bib4.bib' for section 0
+[255] bibtex.pm:1689> INFO - LaTeX decoding ...
+[297] bibtex.pm:1494> INFO - Found BibTeX data source 'Bib4.bib'
+[387] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[388] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[388] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[388] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[406] bbl.pm:654> INFO - Writing 'chapters/Cameron-martin space.bbl' with encoding 'UTF-8'
+[415] bbl.pm:757> INFO - Output to chapters/Cameron-martin space.bbl
