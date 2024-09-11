@@ -1,8 +1,9 @@
 \documentclass[../main.tex]{subfiles}
+%!TEX root = ../main.tex
 
 \begin{document}
 
-In this chapter, we would like to gain some intuition for the structure of a Banach space $X$ with a Gaussian measure $\gamma$. An important part of this is the Cameron-Martin space, which we shall define, and then prove the Cameron-Martin theorem in addition to some related theorems at the end of the chapter. 
+In this chapter, we would like to gain some intuition for the structure of a Banach space $X$ with a Gaussian measure $\gamma$. An important part of this is the Cameron-Martin space, which we shall define, and then prove the Cameron-Martin theorem in addition to some related theorems at the end of the chapter.
 
 \section{The Cameron-Martin space}
 
@@ -10,7 +11,7 @@ We now define the Cameron-Martin space.
 \begin{definition}
 For $h\in X$, put \maths{\abs{h}_{H(\gamma)} = \sup\cbr{l(h):l\in X^*, \ R_\gamma(l)(l)\leq1}.} We can then define the \emph{Cameron-Martin space} to be the linear space \maths{H(\gamma) = \cbr{h\in X: \abs{h}_{H(\gamma)}<\infty}.}
 \end{definition}
-This definition is rather abstract, and gives little indication as to the underlying structure of the Cameron-Martin space. We spend the rest of this chapter trying to build an understanding of this structure. 
+This definition is rather abstract, and gives little indication as to the underlying structure of the Cameron-Martin space. We spend the rest of this chapter trying to build an understanding of this structure.
 
 We begin by with the following lemma.
 \begin{lemma}[\cite{Bogachev1998}]
@@ -18,7 +19,7 @@ We begin by with the following lemma.
 A vector $h\in X$ belongs to the Cameron-Martin space, $H(\gamma)$ precisely when there exists $g\in X_\gamma^*$ with $h = R_\gamma(g)$. In this case we have \maths{\abs{h}_{H(\gamma)} = \norm{g}_{L^2(\gamma)}.}
 \end{lemma}
 \begin{proof}
-Firstly suppose that we have $\abs{h}_{H(\gamma)}<\infty$, then by the Riesz representation theorem, there exists a $g\in X_\gamma^*$ such that for all $f\in X^*$ we have \maths{f(h) = \abrac{f-a_\gamma(f),g} = \inte[X]{\bigbrac{f(x)-a_\gamma(f)}g(x)}{\gamma(x)}.} Therefore, we can see that $h = R_\gamma(g)$. 
+Firstly suppose that we have $\abs{h}_{H(\gamma)}<\infty$, then by the Riesz representation theorem, there exists a $g\in X_\gamma^*$ such that for all $f\in X^*$ we have \maths{f(h) = \abrac{f-a_\gamma(f),g} = \inte[X]{\bigbrac{f(x)-a_\gamma(f)}g(x)}{\gamma(x)}.} Therefore, we can see that $h = R_\gamma(g)$.
 
 On the other hand, suppose that we have $h = R_\gamma(g)$ for some $g\in X_\gamma^*$. Then we have \maths{\abs{h}_{H(\gamma)} &= \sup\cbr{l(h): \ l\in X^*, \ R_\gamma(l)(l)\leq1} \\&= \sup\cbr{R_\gamma(g)(l): \ l\in X^*, \ R_\gamma(l)(l)\leq1} \\&= R_\gamma(g)(g) < \infty,} hence $h\in H(\gamma)$ and $\abs{h}_{H(\gamma)} = \norm{g}_{L^2(\gamma)}$.
 \end{proof}
@@ -68,7 +69,7 @@ We now have all the tools to prove \thmref{the:CM}.
 \begin{enumerate}
     \item Let $\gamma$ be a Gaussian measure and $h\in X$ be such that $\abs{h}_{H(\gamma)} = \infty$. Firstly, suppose that $P$ is a continuous, finite dimensional, linear operator. Then suppose that we have a set $E$ in the $\sigma$-algebra corresponding to $P(X)$ such that $E$ maximises the value $\abs{(\gamma\circ P^{-1})_{Ph}(E) - \gamma\circ P^{-1}(E)}$, then we can consider \maths{\abs{(\gamma\circ P^{-1})_{Ph}(E) - \gamma\circ P^{-1}(E)} &= \abs{\gamma\del{P^{-1}\del{E-Ph}} - \gamma\del{P^{-1}\del{E}}} \\&= \abs{\gamma\del{P^{-1}(E) - h} - \gamma\del{P^{-1}(E)}} \\&= \abs{\gamma_h\del{P^{-1}(E)} - \gamma\del{P^{-1}(E)}} \\&\leq\sup_{A\in\Sigma_X}\abs{\gamma_h(A) - \gamma(A)},} where $\Sigma_X$ is the $\sigma$-algebra corresponding to $X$. In particular, we can see that for any continuous, finite dimensional, linear operator \maths{\norm{\gamma_h-\gamma}\geq\norm{\del{\gamma\circ P^{-1}}_{Ph} - \gamma\circ P^{-1}}.} By assumption, we have that for all $n\in\N$, there exists an $f\in X^*$ such that $R_\gamma(f)(f)\leq 1$ and $f(h)>n$. Since $f$ is a continuous finite dimensional linear operator, we have that \maths{\norm{\gamma_h - \gamma}\geq\norm{\del{\gamma\circ f^{-1}}_{f(h)} - \gamma\circ f^{-1}}\geq1 - \exp\del{-\frac18n^2},} where the second inequality follows from \lemref{lem:tvd_bound}. Now, by taking $n\to\infty$, we see that $\norm{\gamma_h-\gamma} = 1$, which is equivalent to $\gamma_h$ and $\gamma$ being mutually singular by previous discussion.
     \item Suppose now that $h\in X$ with $\abs{h}_{H(\gamma)}<\infty$, then by \lemref{lem:CM1} there exists $g\in X_\gamma^*$ such that $h = R_\gamma(g)$. Now consider the measure with Radon-Nikodym density given by \maths{\rho_h(x) = \exp\del{g(x) - \frac12\abs{h}_{H(\gamma)}^2},} and denote this measure by $\nu$. Now consider the function, for $f\in X^*$, given by \maths{\phi(z) &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\inte[X]{\exp\del{i\del{f(x)-a_\gamma(f)-zg(x)}}}{\gamma(x)},} in particular, notice that $\phi(i)$ coincides with the Fourier transform of $\nu$, $\hat\nu(f)$. On the other hand, since $f-a_\gamma(f) - zg\in X_\gamma^*$, in particular denoting $r = f-a_\gamma(f)-zg$, we have that $\hat\gamma(r) = \exp\del{-\frac12R_\gamma(r)(r)}$, which corresponds exactly to \maths{\phi(z) &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\exp\del{-\frac12\inte[X]{\del{f - a_\gamma(f) - zg}^2}{\gamma}} \\ &= \exp\del{ia_\gamma(f) - \frac12\abs{h}_{H(\gamma)}^2}\exp\del{-\frac12\sigma^2(f) + zR_\gamma(g)(f) - \frac12\sigma^2(g)}.} However, by assumption, we have that $h = R_\gamma(g)$, therefore, $\sigma^2(g) = \abs{h}_{H(\gamma)}^2$, and $R_\gamma(g)(f) = f(h)$. Therefore, \maths{\hat\nu(f) = \phi(i) &= \exp\del{i\del{a_\gamma(f) + f(h)} - \frac12\sigma^2(f)},} and noting that $a_{\gamma_h}(f) = a_\gamma(f) + f(h)$, we see that the Fourier transform of $\nu$ coincides with the Fourier transform of $\gamma_h$ obtained via \thmref{the:arb_gauss_ft}. Hence, we can conclude that $\gamma_h$ is the measure with Radon-Nikodym density given by \maths{\rho_h = \exp\del{g(x) - \frac12\abs{h}_{H(\gamma)}^2}} with respect to $\gamma$. This implies that $\gamma$, and $\gamma_h$ are equivalent.
-    
+
     Finally, we note that \maths{H(\gamma) = \cbr{h\in X:\abs{h}_{H(\gamma)}<\infty} = \cbr{h\in X:\gamma_h\sim\gamma} = X\cap R_\gamma(X_\gamma^*),} where the first equality is by definition, the second is by the argument above, and the the third is by the discussion at the end of the previous section, completing the proof.
 \end{enumerate}
 

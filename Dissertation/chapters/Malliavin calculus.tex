@@ -1,4 +1,5 @@
 \documentclass[../main.tex]{subfiles}
+%!TEX root = ../main.tex
 
 \begin{document}
 
@@ -42,14 +43,14 @@ For orthonormality, consider the inner product \maths{\abrac{H_n,H_m}_{L^2(\gamm
 For completeness, suppose that $f\in L^2(\gamma_1)$ is such that $\abrac{f,H_n}_{L^2(\gamma_1)} = 0$ for all $n\in \N_0$. Then since the leading coefficient of each $H_n$ is $1$, we have that $\abrac{f,x^n}_{L^2(\gamma_1)} = 0$ for all $n\in\N_0$. Therefore, considering the fourier transform of $f$, we have \maths{\hat f(t) &= \inte[\R ]{f(x)e^{itx}}{\gamma_1(x)} = \sum_{n\geq0}\frac{\del{it}^n}{n!}\inte[\R ]{f(x)x^n}{\gamma_1(x)} = 0.} By Lebesgue's dominated convergence, the swapping of the sum and the integral is justified. Therefore, we have that $\hat f(t) = 0$, implying that $f = 0$.
 \end{proof}
 
-The immediate implication of \propref{prop:Hermite_basis} is that given an $f\in L^2(\gamma_1)$, we can decompose it as below \maths{f = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}H_n.} Specifically, we can write the function $e^{ax}$ as follows \maths{e^{ax} &= \sum_{n\geq0}\frac{1}{n!}\abrac{e^{a\cdot},H_n}_{L^2(\gamma_1)}H_n(x) \\ &= \sum_{n\geq0}\frac{a^n}{n!}\abrac{e^{a\cdot},1}_{L^2(\gamma_1)}H_n(x)} since $\delta$ and $\Dif$ are adjoint. Finally, noting that $\abrac{e^{a\cdot},1}_{L^2(\gamma_1)} = e^{\frac12a^2}$, we have that 
+The immediate implication of \propref{prop:Hermite_basis} is that given an $f\in L^2(\gamma_1)$, we can decompose it as below \maths{f = \sum_{n\geq0}\frac{1}{n!}\abrac{f,H_n}_{L^2(\gamma_1)}H_n.} Specifically, we can write the function $e^{ax}$ as follows \maths{e^{ax} &= \sum_{n\geq0}\frac{1}{n!}\abrac{e^{a\cdot},H_n}_{L^2(\gamma_1)}H_n(x) \\ &= \sum_{n\geq0}\frac{a^n}{n!}\abrac{e^{a\cdot},1}_{L^2(\gamma_1)}H_n(x)} since $\delta$ and $\Dif$ are adjoint. Finally, noting that $\abrac{e^{a\cdot},1}_{L^2(\gamma_1)} = e^{\frac12a^2}$, we have that
 \begin{equation}
     \label{eq:1d_exp_decomposition}
     e^{ax - \frac12a^2} = \sum_{n\geq0}\frac{a^n}{n!}H_n(x).
 \end{equation}
 
 \subsection{Ornstein-Uhlenbeck operator}
-We now introduce the \emph{Ornstein-Uhlenbeck operator}, $L$, a second order differential operator defined via 
+We now introduce the \emph{Ornstein-Uhlenbeck operator}, $L$, a second order differential operator defined via
 \begin{equation}
     \label{eq:1d_OU_operator}
     Lf := -\delta\Dif f = -xf'(x) + f''(x).
@@ -99,14 +100,14 @@ A real valued stochastic process $B = \cbr{B_t}_{t\geq0}$ defined on defined on 
 
 Now let us consider the space $H = L^2\del{\intcc{0,1},\R}$, the continuous, real-valued, square integrable functions from $\intcc{0,1}$ into $\R$. For this discussion, any separable Hilbert space will suffice, however, the $H$ we have defined will be useful later, and it is more constructive to work with a concrete example. Furthermore, suppose that $\cbr{e_n}_{n\in\N}$ is a orthonormal basis for $H$, so that for $h\in H$, we may write \maths{h = \sum_{n\in\N}h_ne_n,} where $h_n = \abrac{h,e_n}_H$. Now let us define a linear map $W:H\to L^2(\Omega, P)$, where $\del{\Omega,P}$ is a probability space such that $W(e_n) = \xi_n$, where $\xi_n$ is a standard Gaussian random variable, in other words $\xi_n$ can be thought of as being distributed as $\xi_n\sim\mathcal{N}(0,1)$. This map is called \emph{Gaussian white noise}. Then for arbitrary $h\in H$, we have \maths{W(h) = \sum_{n\in\N} h_n\xi_n.} It is then clear that \maths{\Ex W(h) = 0 , \ \ \ \text{and} \ \ \  \Ex W(h)W(g) = \abrac{h,g}_H.}
 
-Let us now consider the function $\1_{\intco{0,t}}\in H$ (this is where our specific choice of $H$ is important), and define $B_t := W\del{\1_{\intco{0,t}}}$. Now notice that $\Ex B_t = 0$, and moreover, \maths{\Ex\sbr{B_tB_s} &= \Ex\sbr{W\del{\1_{\intco{0,t}}}W\del{\1_{\intco{0,s}}}} \\ &= \abrac{\1_{\intco{0,t}},\1_{\intco{0,s}}}_H \\ &= t\wedge s.} It follows that $\cbr{B_t}_{t\geq0}$ is a Brownian motion. 
+Let us now consider the function $\1_{\intco{0,t}}\in H$ (this is where our specific choice of $H$ is important), and define $B_t := W\del{\1_{\intco{0,t}}}$. Now notice that $\Ex B_t = 0$, and moreover, \maths{\Ex\sbr{B_tB_s} &= \Ex\sbr{W\del{\1_{\intco{0,t}}}W\del{\1_{\intco{0,s}}}} \\ &= \abrac{\1_{\intco{0,t}},\1_{\intco{0,s}}}_H \\ &= t\wedge s.} It follows that $\cbr{B_t}_{t\geq0}$ is a Brownian motion.
 
 Now let us consider the $\span\cbr{\1_{\intco{0,t}}}_{t\geq0}$. Then it is easy to see that this is the set of step functions from $\intcc{0,1}$ into $\R$, in other words, it is the set of functions of the form \maths{\varphi_t = \sum_{0\leq k\leq n-1}\alpha_k\1_{\intco{t_k,t_{k+1}}}(t),} where $0 \leq t_0 <t_1<\cdots <t_n$ is a partition of some interval, and $\cbr{\alpha_k}_{0\leq k\leq n-1}\subset\R$. We can then define the \emph{Wiener integral} to be \maths{\inte[\intcc{0,1}]{\varphi_t}{B_t} := \sum_{0\leq k\leq n-1}\alpha_k\del{B_{t_{k+1}} - B_{t_k}}.} By linearity, it is easy to see that \maths{\inte[\intcc{0,1}]{\varphi_t}{B_t} = W(\varphi).} At this point, let us remark on some properties of the Wiener integral. Firstly, it has an expectation of $0$, clearly \maths{\Ex\sbr{\inte[\intcc{0,1}]{\varphi_t}{B_t}} = \Ex\sbr{W(\varphi)} = 0.} Furthermore, we can consider the second moment \maths{\Ex\sbr{\inte[\intcc{0,1}]{\varphi_t}{B_t}}^2 = \Ex\sbr{W(\varphi)}^2 = \abrac{\varphi,\varphi}_H = \norm{\varphi}_H^2.} In particular $\inte[\intcc{0,1}]{\varphi_t}{B_t}$ is a Gaussian random variable with mean $0$ and variance $\norm{\varphi}_H^2$.
 
 Finally, notice that $\span\cbr{\1_{\intco{0,t}}}_{t\geq0}$ is a dense subspace of $H = L^2(\intcc{0,1},\R)$. Therefore, we can extend the Wiener integral to a linear isometry \maths{h\mapsto\inte[\intcc{0,1}]{h(t)}{B_t}} between $L^2(\intcc{0,1},\R)$ and the Gaussian subspace of $L^2(\Omega)$ spanned by $\cbr{W\del{\1_{\intco{0,t}}}}_{t\in\intcc{0,1}}$. Furthermore, the Wiener integral of $h\in H$ agrees with $W(h)$, and it is a Gaussian random variable with expectation $0$ and variance $\norm{h}_H^2$.
 
 \subsection{The Malliavin derivative}
-In this section, we consider the same Hilbert space $H = L^2(\intcc{0,1},\R)$, and the same probability space as before $\del{\Omega,\Sigma,P}$, where $\Sigma$ is the $\sigma$-algebra generated by the Brownian motion, $\cbr{B_t}_{t\geq0}$, we constructed above. Now denote by $\S$ the set of smooth, cylindrical random variables of the form \maths{F = f\del{W(h_1),\cdots,W(h_n)},} for some $f\in C^\infty\del{\R^n}$ and $h_i\in H$. 
+In this section, we consider the same Hilbert space $H = L^2(\intcc{0,1},\R)$, and the same probability space as before $\del{\Omega,\Sigma,P}$, where $\Sigma$ is the $\sigma$-algebra generated by the Brownian motion, $\cbr{B_t}_{t\geq0}$, we constructed above. Now denote by $\S$ the set of smooth, cylindrical random variables of the form \maths{F = f\del{W(h_1),\cdots,W(h_n)},} for some $f\in C^\infty\del{\R^n}$ and $h_i\in H$.
 
 We will now define the Malliavin derivative on $\S$.
 \begin{definition}
@@ -115,7 +116,7 @@ Let $F\in\S$, then we define the \emph{Malliavin derivative}, $\Dif F$, to be th
 \end{definition}
 For example, we have that $\Dif W(h) = h$, and in particular, we have $\Dif B_t = \1_{\intco{0,t}}$ for all $t\geq0$. Furthermore, since $S$ is dense in $L^2(\Omega)$, $\Dif$ extends uniquely to an operator on all of $L^2(\Omega)$.
 
-On the other hand, if we consider $\S_H$ to be the class of smooth and cylindrical stochastic processes of the form \maths{u_t = \sum_{1\leq j\leq n}F_jh_j(t),} for $F_j\in \S$ and $h_j\in H$. Then we can define an analogy to the divergence operator seen previously. 
+On the other hand, if we consider $\S_H$ to be the class of smooth and cylindrical stochastic processes of the form \maths{u_t = \sum_{1\leq j\leq n}F_jh_j(t),} for $F_j\in \S$ and $h_j\in H$. Then we can define an analogy to the divergence operator seen previously.
 \begin{definition}
 \label{def:Mall_div}
 Let $u\in \S_H$, then we define the \emph{divergence}, $\delta u$, of $u$ to be the random variable given by \maths{\delta u := \sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}.}
@@ -136,7 +137,7 @@ So letting $p(x)$ denote the density of the $n$-dimensional standard Gaussian me
 Below, we make note of some basic properties of the derivative and divergence operators.
 \begin{proposition}
 \label{prop:operator_properties}
-Let $u,v\in\S_H$, $F\in\S$, and $h\in H$. Then if $\cbr{e_i}_{i\in\N}$ is an orthonormal basis for $H$, we have the following 
+Let $u,v\in\S_H$, $F\in\S$, and $h\in H$. Then if $\cbr{e_i}_{i\in\N}$ is an orthonormal basis for $H$, we have the following
 \begin{subequations}
 \begin{equation}
     \label{eq:property1}
@@ -150,7 +151,7 @@ Let $u,v\in\S_H$, $F\in\S$, and $h\in H$. Then if $\cbr{e_i}_{i\in\N}$ is an ort
 Where we write $\Dif_h F = \abrac{\Dif F,h}_H$.
 \end{proposition}
 \begin{proof}
-To prove \eqref{eq:property1}, suppose that \maths{u = \sum_{1\leq j\leq n}F_jh_j,} for some $h_j\in H$. Moreover, noting that $\Dif_hW(h_j) = \abrac{h_j,h}_H$, then we have \maths{\Dif_h\del{\delta u} &= \Dif_h\del{\sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}} \\ &= \sum_{1\leq j\leq n}F_j\abrac{h_j,h}_H + \sum_{1\leq j\leq n}\del{\Dif_h F_jW(h_j) - \abrac{\Dif_h(\Dif F_j),h_j}_H} \\ &= \abrac{u,h}_H + \delta\del{\Dif_hu}.} 
+To prove \eqref{eq:property1}, suppose that \maths{u = \sum_{1\leq j\leq n}F_jh_j,} for some $h_j\in H$. Moreover, noting that $\Dif_hW(h_j) = \abrac{h_j,h}_H$, then we have \maths{\Dif_h\del{\delta u} &= \Dif_h\del{\sum_{1\leq j\leq n}\del{F_jW(h_j) - \abrac{\Dif F_j,h_j}_H}} \\ &= \sum_{1\leq j\leq n}F_j\abrac{h_j,h}_H + \sum_{1\leq j\leq n}\del{\Dif_h F_jW(h_j) - \abrac{\Dif_h(\Dif F_j),h_j}_H} \\ &= \abrac{u,h}_H + \delta\del{\Dif_hu}.}
 
 To prove \eqref{eq:property2}, first let us rewrite \maths{\Ex\del{\delta(u)\delta(v)} = \Ex\del{\abrac{v,\Dif(\delta u)}_H} = \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\Dif_{e_i}(\delta u)},} by \propref{prop:Mall_adjoint}. Then using \eqref{eq:property1}, we have \maths{\Ex\del{\delta(u)\delta(v)} &= \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\del{\abrac{u,e_i}_H + \delta(\Dif_{e_i}u)}} \\ &= \Ex\del{\abrac{u,v}_H} + \Ex\del{\sum_{i\in\N}\abrac{v,e_i}_H\delta(\Dif_{e_i}u)} \\ &= \Ex\del{\abrac{u,v}_H} + \Ex\del{\sum_{i,j\in\N}\Dif_{e_i}\abrac{u,e_j}_H\Dif_{e_j}\abrac{v,e_j}_H},} where the last inequality follows from \propref{prop:Mall_adjoint}, similarly to the first step.
 \end{proof}
@@ -213,7 +214,7 @@ Part of the motivation, for our purposes, of the Wiener chaos decomposition is t
 
 \subsection{The Ornstein-Uhlenbeck operator}
 Previously, we defined the Ornstein-Uhlenbeck operator $L$ by \eqref{eq:1d_OU_operator}, restated below:
-\maths{Lf:=-\delta\Dif f,} where $\delta$ and $\Dif$ were defined on continuous functions from $\R$ into $\R$, $C^1\del{\R}$. We define the Ornstein-Uhlenbeck operator $\L$ as before with definitions of $\Dif$ and $\delta$ given by \defnref{def:Mall_deriv} and \defnref{def:Mall_div} respectively, in other words for $F\in L^2(\Omega)$ 
+\maths{Lf:=-\delta\Dif f,} where $\delta$ and $\Dif$ were defined on continuous functions from $\R$ into $\R$, $C^1\del{\R}$. We define the Ornstein-Uhlenbeck operator $\L$ as before with definitions of $\Dif$ and $\delta$ given by \defnref{def:Mall_deriv} and \defnref{def:Mall_div} respectively, in other words for $F\in L^2(\Omega)$
 \begin{equation}
     \label{eq:ornstein_uhlenbeck_operator}
     \L F = -\delta\Dif F.
@@ -234,7 +235,7 @@ The linearity of $\L$ and \thmref{the:wiener_chaos} then gives the following cor
 \begin{corollary}
 \label{cor:OU_on_L2}
 Let $F\in L^2(\Omega)$, then we can we have the identity \maths{\L F = -\sum_{n\in\N_0}nJ_nF.}
-\end{corollary} 
+\end{corollary}
 
 \subsection{The Ornstein-Uhlenbeck semigroup}
 We will now formally define the Ornstein-Uhlenbeck semigroup.

@@ -1,4 +1,5 @@
 \documentclass[../main.tex]{subfiles}
+%!TEX root = ../main.tex
 
 \begin{document}
 
@@ -18,7 +19,7 @@ We now introduce a proposition which allows us to completely determine a measure
 If two bounded Borel measures have equal Fourier transforms, then they coincide.
 \end{proposition}
 \begin{proof}
-We will outline the proof of this proposition following the proof found in Proposition 3.8.6 in Bogachev's \textit{Measure Theory} \cite{Bogachev2007}. 
+We will outline the proof of this proposition following the proof found in Proposition 3.8.6 in Bogachev's \textit{Measure Theory} \cite{Bogachev2007}.
 
 To this end, it suffices to show that if $\mu$ is a measure on $\R^n$ such that its Fourier transform, $\hat{\mu}$, is identically zero, then so is $\mu$. Suppose that $\mu$ is such that $\hat{\mu} = 0$, then we can assume that $\norm{\mu}\leq 1$ since it is bounded. Furthermore, consider a bounded continuous function $f$, and we may similarly assume that $\abs{f}\leq 1$. Finally, take $\epsilon\in\intoo{0,1}$. Now let $f_0$ be a continuous function with bounded support such that $\abs{f_0}\leq 1$ and \maths{\inte[\R^n]{\abs{f(x)-f_0(x)}}{\abs{\mu }(x)}\leq\epsilon.} Since $f_0$ has bounded support, we can find a cube $K = \intcc{-\pi k,\pi k}^n$ containing the support of $f_0$ such that $\abs{\mu }\del{\R^n\setminus K}<\epsilon$. Now by the Stone-Weierstrass theorem, there exists a continuous function of the form \maths{g(x) = \sum_{1\leq j\leq m}c_j\exp\del{i\abrac{y_j,x}},} where the $y_j$ are vectors with coordinates of the form $\frac{l}{k}$, such that \maths{\abs{f_0(x)-g(x)}\leq\epsilon,} for all $x\in K$. Notice that $g$ is periodic on $\R^n$ by construction, hence $\abs{g(x)}<1 + \epsilon<2$ on $\R^n$. Moreover, $\inte[\R^n]{g}{\mu } = 0$, since $\hat{\mu } = 0$. Now it just remains to put all the parts together.
 \maths{\abs{\inte[\R^n]{f}{\mu }} &\leq \abs{\inte[\R^n]{f-f_0}{\mu }} + \abs{\inte[\R^n]{f_0}{\mu }} \\ &\leq\epsilon + \abs{\inte[\R^n]{f_0 - g + g}{\mu }} \\ &\leq 2\epsilon + \inte[\R^n\setminus K]{\abs{g}}{\abs{\mu }} \\ &\leq 4\epsilon.} Taking $\epsilon\to 0$ gives the result.
@@ -46,7 +47,7 @@ We will now look at some examples.
 \begin{enumerate}
     \item Consider the measure, $\mu$ on $\R^n$ with density with respect to the Lebesgue measure given by \maths{\dod{\mu}{\lambda}(x) = \frac{1}{\del{2\pi}^{n/2}}e^{-\frac12\norm{x}^2}.}
     Then one can verify that for any linear functional $f$ on $\R^n$, by considering $f$ as an element of $\R^n$, we have \maths{\hat{\mu\circ f^{-1}}(t) = \exp\del{-\frac12t^2\norm{f}^2}.} Comparing this to \propref{prop:gauss_ft}, we see that $\mu\circ f^{-1}$ is a Gaussian measure. In fact $\mu$ is the standard Gaussian measure on $\R^n$, denoted $\gamma_n$.
-    \item On the other hand, suppose that we have a measure $\rho$ on $\R^2$ such that the density with respect to the Lebesgue measure is given by \maths{\dod{\rho}{\lambda}(x) = \case{\frac1\pi e^{-\frac12\norm{x}^2} & \text{if $x\in\intco{0,\infty}^2\cup\intoc{-\infty,0}^2$} \\ 0 & \text{otherwise}}.} 
+    \item On the other hand, suppose that we have a measure $\rho$ on $\R^2$ such that the density with respect to the Lebesgue measure is given by \maths{\dod{\rho}{\lambda}(x) = \case{\frac1\pi e^{-\frac12\norm{x}^2} & \text{if $x\in\intco{0,\infty}^2\cup\intoc{-\infty,0}^2$} \\ 0 & \text{otherwise}}.}
     Firstly notice that if we take $f = \frac{1}{\sqrt{2}}\del{1,1}^T$, then \maths{\hat{\rho\circ f^{-1}}(t) = \frac12e^{-\frac12t^2},} which is not of the form required to be Gaussian by \propref{prop:gauss_ft}. However, if we consider $e_1 = \del{1,0}^T$, then \maths{\hat{\rho\circ e_1^{-1}}(t) = e^{-\frac{1}{2}t^2},} which implies that $\rho\circ e_1^{-1}$ is Gaussian. Similarly, we see that for $e_2 = \del{0,1}^T$, we have $\rho\circ e_2^{-1}$ is Gaussian. This implies that each component has a Gaussian distribution, but their sum does not.
 \end{enumerate}
 \end{example}
@@ -55,11 +56,11 @@ We now extend \propref{prop:gauss_ft} to Gaussian measures on $\R^n$.
 
 \begin{proposition}
 \label{prop:n_gauss_ft}
-A measure $\gamma$, on $\R^n$ is Gaussian if and only if its Fourier transform has the form 
+A measure $\gamma$, on $\R^n$ is Gaussian if and only if its Fourier transform has the form
 \begin{equation}
     \label{eq:n_gauss_ft}
     \hat\gamma(y) = \exp\brac{i\abrac{y,a} - \frac12\abrac{Ky,y}},
-\end{equation} 
+\end{equation}
 where $a\in\R^n$ is a vector and $K$ is a nonnegative matrix.
 
 The measure $\gamma$ has density if and only if $K$ is nondegenerate, and in this case the density is given by \maths{p(\cdot,a,K): x\mapsto \frac{1}{\sqrt{(2\pi)^n\det K}}\exp\brac{-\frac12\abrac{K^{-1}(x-a),x-a}}.}
@@ -106,7 +107,7 @@ We can now generalise Propositions \ref{prop:gauss_ft} and \ref{prop:n_gauss_ft}
 
 \begin{theorem}[\cite{Bogachev1998}]
 \label{the:arb_gauss_ft}
-A measure $\gamma$ on a Banach space is Gaussian if and only if its Fourier transform has the form 
+A measure $\gamma$ on a Banach space is Gaussian if and only if its Fourier transform has the form
 \begin{equation}
     \label{eq:arb_gauss_ft}
     \hat\gamma(f) = \exp\brac{iL(f)- \frac12 B(f,f)},
@@ -162,10 +163,10 @@ Now let us consider the space of continuous functions from the closed unit inter
 Now suppose that $A\subset C\intcc{0,1}$ is of the form \maths{A = \cbr{f\in C\intcc{0,1}:f(t_0)\in A_0,\cdots, f(t_k)\in A_k},} where $0=t_0<t_1<\cdots<t_k$ and $A_0,\cdots,A_k\in\Bor(\R)$. Then, from \defnref{def:brownian_motion_1}, we can see that \maths{P^W(A) &= P\del{B_{t_0}\in A_0,\cdots, B_{t_k}\in A_k} \\ &= \1_{A_0}(0)\inte[A_1\times\cdots\times A_k]{p_{t_1}(x_1)p_{t_2-t_1}(x_2-x_1)\cdots p_{t_k-t_{k-1}}(x_k - x_{k-1})}{x},} where $p_t(x):= p(x,0,t)$ from \defnref{def:gauss_1d} is the Gaussian density in one dimension. We then call the probability space $\del{C\intcc{0,1},\mathscr{C},P^W}$ the \emph{Wiener space}.
 
 \section{Notation}
-We end this chapter by introducing some useful notation that we will come across again later in our discussion of the Cameron-Martin space and theorem. Let $\gamma$ be a Gaussian measure on a Banach space $X$, then we denote by $X_\gamma^*$ the closure of the set \maths{\cbr{f - a_\gamma(f):f\in X^*}} embedded into $L^2(\gamma)$ with respect to the corresponding norm. 
+We end this chapter by introducing some useful notation that we will come across again later in our discussion of the Cameron-Martin space and theorem. Let $\gamma$ be a Gaussian measure on a Banach space $X$, then we denote by $X_\gamma^*$ the closure of the set \maths{\cbr{f - a_\gamma(f):f\in X^*}} embedded into $L^2(\gamma)$ with respect to the corresponding norm.
 
-Notice that we can also define $R_\gamma:X_\gamma^*\to (X^*)'$ by having \maths{R_\gamma(f)(g) = \inte[X]{f(x)\sbr[2]{g(x) - a_\gamma(g)}}{\gamma(x)}.} For centred measures, this is just an extension from $X^*$ to $X_\gamma^*$. But for any $f\in X^*$, we have $R_\gamma(f)$ coincides with $R_\gamma\brac{f-a_\gamma(f)}$. 
+Notice that we can also define $R_\gamma:X_\gamma^*\to (X^*)'$ by having \maths{R_\gamma(f)(g) = \inte[X]{f(x)\sbr[2]{g(x) - a_\gamma(g)}}{\gamma(x)}.} For centred measures, this is just an extension from $X^*$ to $X_\gamma^*$. But for any $f\in X^*$, we have $R_\gamma(f)$ coincides with $R_\gamma\brac{f-a_\gamma(f)}$.
 
 If it is the case that $R_\gamma(f)$, with $f\in X_\gamma^*$ is generated by an element of the initial space $X$ - for example in the $n$-dimensional case - then $\abrac{R_\gamma(f),l} = \abrac{l,R_\gamma(f)}$ for all $l\in X^*$.
-    
+
 \end{document}

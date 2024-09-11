@@ -1,4 +1,5 @@
 \documentclass[../main.tex]{subfiles}
+%!TEX root = ../main.tex
 
 \begin{document}
 
@@ -10,7 +11,7 @@ Throughout this section, we consider the probability space $\del{\R^n,\Bor(\R^n)
 \label{def:Gauss_symm}
 Let $1\leq k\leq n$, $L$ be a linear subspace of $\R^n$ of dimension $n-k$, and $e\in L^\perp$ be a unit vector. We define the Gaussian $k$-symmetrization to be the mapping $S(L,e)$ on closed subsets $A\subset\R^n$ as follows \maths{S(L,e)(A) := \bigcup_{x\in L}\del{\cbr{y:\abrac{y,e}\geq r}\cap\del{x + L^\perp}},} where $r$ is such that \maths{\gamma_k\del{\cbr{y:\abrac{y,e}\geq r}\cap\del{x + L^\perp}} = \gamma_k\del{A\cap\del{x + L^\perp}},} and $\gamma_k$ is the standard $k$-dimensional Gaussian measure the $k$-dimensional affine subspace $x + L^\perp$.
 \end{definition}
-This is quite an abstract definition, but it is quite easy to picture in the case that $n=1$. For example, take $n=1$, $L = \cbr{0}$, and $A$ a closed interval in $\R$. Then setting $\alpha = \gamma_1(A)$, we have $S(L,e)(A) = \intoo{\Phi^{-1}(1-\alpha),\infty}$, where $\Phi(x) = \gamma_1\intoo{-\infty,x}$, see \figref{fig:gauss_symm}. 
+This is quite an abstract definition, but it is quite easy to picture in the case that $n=1$. For example, take $n=1$, $L = \cbr{0}$, and $A$ a closed interval in $\R$. Then setting $\alpha = \gamma_1(A)$, we have $S(L,e)(A) = \intoo{\Phi^{-1}(1-\alpha),\infty}$, where $\Phi(x) = \gamma_1\intoo{-\infty,x}$, see \figref{fig:gauss_symm}.
 \vspace{0.5cm}
 \begin{figure}[H]
     \centering
@@ -28,12 +29,12 @@ This is quite an abstract definition, but it is quite easy to picture in the cas
       \addplot [fill=blue!20, draw=none, domain=-1.5:-0.5] {gauss(0,1)} \closedcycle;
       \addplot [very thick,cyan!50!black] {gauss(0,1)};
       \addplot [fill=red!20, draw=none, domain=0.7007:3] {gauss(0,1)} \closedcycle;
-    
-    
+
+
         \draw [yshift=-0.6cm, latex-latex](axis cs:-1.5,0) -- node [fill=white] {$A$} (axis cs:-0.5,0);
         \draw [yshift=-0.6cm, latex-latex](axis cs:0.7007,0) -- node [fill=white] {$S(L,e)(A)$} (axis cs:3,0);
     \end{axis}
-    
+
     \end{tikzpicture}
     \caption{Gaussian symmetrization in the case that $n=1$, $L = \cbr{0}$, $A = \intcc{-1.5,-0.5}$. $\gamma_1(A)$ is given by the blue area under the density curve of $\gamma_1$. Then $S(L,e)(A) = \intoo{r,\infty}$, where $r = \Phi^{-1}\del{1-\gamma_1(A)} = 0.7007$. Importantly the red area is equal to the blue area.}
     \label{fig:gauss_symm}
@@ -50,14 +51,14 @@ For arbitrary closed sets $A,B\in\R^n$, one has:
     \item For all $v\in L$ we have $S(L,e)(A+v) = S(L,e)(A)+v$;
     % \item $S(L,e)(A) = S(L,e)(A) + \del{L + \R^1e}^\perp$, and $S(L,e)(A) +\lambda e\subset S(L,e)(A)$ for all $\lambda\geq0$;
     \item If $\cbr{A_i}$ is an increasing sequence of open sets such that $A = \bigcup_i A_i$, then \maths{S(L,e)(A) = \bigcup_i S(L,e)(A_i).}
-    % \item If $\gamma_n(B) = \gamma_n(B+L^\perp)$, then $\gamma_n(A\cap B) = \gamma_n\del{S(L,e)(A)\cap B}$. 
+    % \item If $\gamma_n(B) = \gamma_n(B+L^\perp)$, then $\gamma_n(A\cap B) = \gamma_n\del{S(L,e)(A)\cap B}$.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \begin{enumerate}
     \item Suppose that $A\subset B$, and fix $x\in L$, then notice that $A\cap\del{x + L^\perp}\subset B\cap\del{x + L^\perp}$. In particular, the $r_B$ appearing in the definition $S(L,e)(B)$ is larger than or equal to the corresponding $r_A$ appearing in the definition of $S(L,e)(A)$. This implies that $S(L,e)(A)\cap\del{x + L^\perp}\subset S(L,e)(B)\cap\del{x + L^\perp}$, and then taking the union over all $x\in L$ gives the result.
     \item Notice for a fixed $x\in L$ that since $\gamma_k\del{A\cap\del{x + L^\perp}} + \gamma_k\del{A^C\cap\del{x + L^\perp}} = 1$, therefore, we have that $S(L,-e)(A)\cap\del{x + L^\perp}$ and $S(L,e)(A^C)\cap\del{x + L^\perp}$ are halfspaces of $x + L^\perp$ in opposite directions, such that the sum of their $\gamma_k$ measures is $1$. This implies that $\del{S(L,-e)(A)\cap\del{x + L^\perp}}^C = S(L,e)(A^C)\cap\del{x + L^\perp}$. Again, taking the union over all $x\in L$ gives the result.
-    \item Since for fixed $v\in L$ and fixed $x\in L$, we have that \maths{\gamma_k\del{A\cap\del{x + L^\perp}} = \gamma_k\del{(A+v)\cap\del{x + v + L^\perp}},} therefore, we have \maths{S(L,e)(A)\cap\del{x + L^\perp} + v = S(L,e)(A+v)\cap\del{x + v+ L^\perp},} and taking the union over all $x\in L$ gives the result. 
+    \item Since for fixed $v\in L$ and fixed $x\in L$, we have that \maths{\gamma_k\del{A\cap\del{x + L^\perp}} = \gamma_k\del{(A+v)\cap\del{x + v + L^\perp}},} therefore, we have \maths{S(L,e)(A)\cap\del{x + L^\perp} + v = S(L,e)(A+v)\cap\del{x + v+ L^\perp},} and taking the union over all $x\in L$ gives the result.
     \item For fixed $x\in L$, since we have that $\cbr{A_i}$ is an increasing sequence we know that \maths{\gamma_k\del{\bigcup_iA_i\cap\del{x + L^\perp}} = \lim_{i\to\infty}\gamma_k\del{A_i\cap\del{x + L^\perp}}.} This implies that \maths{S(L,e)\del{\bigcup_iA_i}\cap\del{x + L^\perp} = \bigcup_iS(L,e)(A_i)\cap\del{x + L^\perp},} and taking the union over all $x\in L$ gives the result.
 \end{enumerate}
 \end{proof}
@@ -77,7 +78,7 @@ Let $A$ and $B$ be two Borel sets in $\R^n$. Then for all $\lambda\in\intcc{0,1}
 In the statement of the original theorem by Antoine Ehrhard \cite{Ehrhard1983}, we require that $A,B\subset\R^n$ are convex sets, however, above we state the inequality for any measurable sets $A,B$ in $\R^n$. The proof of this, however, is outside of the scope of this dissertation, but can be found in Borell's 2003 paper `The Ehrhard inequality' \cite{Borell2003}. Below, we present the proof under the assumption that $A$ and $B$ are convex sets.
 
 \begin{proof}
-First, let us consider $A+e_{n+1}$ and $B$ to be sets in $\R^{n+1}$, where $\cbr{e_i}_{1\leq i\leq n+1}$ is the standard basis for $\R^{n+1}$. Then take $C$ to be the convex hull of $A + e_{n+1}$ and $B$, then we may define \maths{C_\lambda := \R^n\cap \del{C-\lambda e_{n+1}} = \lambda A + (1-\lambda)B.} We now define the function \maths{f(\lambda) = \Phi^{-1}\cbr{\gamma_n\del{C_\lambda}}.} In particular notice that \eqref{eq:ehrhard} is equivalent to 
+First, let us consider $A+e_{n+1}$ and $B$ to be sets in $\R^{n+1}$, where $\cbr{e_i}_{1\leq i\leq n+1}$ is the standard basis for $\R^{n+1}$. Then take $C$ to be the convex hull of $A + e_{n+1}$ and $B$, then we may define \maths{C_\lambda := \R^n\cap \del{C-\lambda e_{n+1}} = \lambda A + (1-\lambda)B.} We now define the function \maths{f(\lambda) = \Phi^{-1}\cbr{\gamma_n\del{C_\lambda}}.} In particular notice that \eqref{eq:ehrhard} is equivalent to
 \begin{equation}
 \label{eq:new_ehrhard}
     f(\lambda)\geq\lambda f(1) + (1-\lambda)f(0).
@@ -89,7 +90,7 @@ To show that \eqref{eq:new_ehrhard} holds, let us consider the Gaussian $n$-symm
 Finally, we arrive at the Gaussian isoperimetric inequality.
 \begin{theorem}
 \label{the:gaussian_isoperimetric_inequality}
-Let $\gamma_n$ be the standard Gaussian measure on $\R^n$, and let $U$ be the closed unit ball in $\R^n$. Then for any measurable set $A\in\R^n$, and any $\epsilon\geq0$, the following holds 
+Let $\gamma_n$ be the standard Gaussian measure on $\R^n$, and let $U$ be the closed unit ball in $\R^n$. Then for any measurable set $A\in\R^n$, and any $\epsilon\geq0$, the following holds
 \begin{equation}
     \label{eq:iso_inequality}
     \Phi^{-1}\cbr{\gamma_n\del{A+\epsilon U}}\geq \Phi^{-1}\cbr{\gamma_n\del{A}} + \epsilon.
@@ -99,12 +100,12 @@ Let $\gamma_n$ be the standard Gaussian measure on $\R^n$, and let $U$ be the cl
 This statement follows almost immediately from \thmref{the:ehrhards_inequality}. Suppose that $A$ is a measurable set in $\R^n$, then we consider the following \maths{\Phi^{-1}\cbr{\gamma_n\del{A + \epsilon U}} &= \Phi^{-1}\cbr{\gamma_n\del{\lambda(\lambda^{-1}A) + (1-\lambda)(1-\lambda)^{-1}\epsilon U}} \\ &\geq \lambda\Phi^{-1}\cbr{\gamma_n\del{\lambda^{-1}A}} + (1-\lambda)\Phi^{-1}\cbr{\gamma_n\del{(1-\lambda)^{-1}\epsilon U}}.} Taking $\lambda\to 1$, the right hand side goes to $\Phi^{-1}\cbr{\gamma_n(A)} + \epsilon$, giving \eqref{eq:iso_inequality}.
 \end{proof}
 
-It is not exactly obvious how \thmref{the:gaussian_isoperimetric_inequality} is related to an isoperimetric inequality, or indeed, what set maximises the volume to surface area ratio under the standard Gaussian measure. In order to understand this inequality, let us rewrite it as 
+It is not exactly obvious how \thmref{the:gaussian_isoperimetric_inequality} is related to an isoperimetric inequality, or indeed, what set maximises the volume to surface area ratio under the standard Gaussian measure. In order to understand this inequality, let us rewrite it as
 \begin{equation}
     \label{eq:gauss_iso_rewrite}
     \gamma_n\del{A + \epsilon U}\geq\Phi\del{a + \epsilon},
 \end{equation}
-where $a = \Phi^{-1}\cbr{\gamma_n(A)}$. However, notice that $\Phi\del{a + \epsilon}$ is then equal to $\gamma_n\del{H + \epsilon U}$, where $H$ is a halfspace such that $\gamma_n(H) = \gamma_n(A)$. Such an $H$ exists since $\gamma_n$ is a bounded measure for any $n$. Therefore, we can rewrite \eqref{eq:gauss_iso_rewrite} as 
+where $a = \Phi^{-1}\cbr{\gamma_n(A)}$. However, notice that $\Phi\del{a + \epsilon}$ is then equal to $\gamma_n\del{H + \epsilon U}$, where $H$ is a halfspace such that $\gamma_n(H) = \gamma_n(A)$. Such an $H$ exists since $\gamma_n$ is a bounded measure for any $n$. Therefore, we can rewrite \eqref{eq:gauss_iso_rewrite} as
 \begin{equation}
     \label{eq:gauss_iso_rerewrite}
     \gamma_n\del{A + \epsilon U}\geq\gamma_n\del{H + \epsilon U}.
